@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "../common/Container";
+
 const links = [
   { name: "About Us", href: "/#about" },
   { name: "Signature", href: "/#signature" },
@@ -16,6 +17,7 @@ const links = [
 
 export default function Navbar() {
   const [isHero, setIsHero] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,9 +28,11 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
 
     const hash = window.location.hash.slice(1);
+
     if (hash) {
       requestAnimationFrame(() => {
         const target = document.getElementById(hash);
+
         if (target) {
           window.scrollTo({
             top: target.getBoundingClientRect().top + window.scrollY - 80,
@@ -48,13 +52,18 @@ export default function Navbar() {
     if (window.location.pathname !== "/") return;
 
     event.preventDefault();
+
     const target = document.getElementById(href.slice(2));
+
     if (target) {
       window.history.pushState(null, "", href);
+
       window.scrollTo({
         top: target.getBoundingClientRect().top + window.scrollY - 80,
         behavior: "smooth",
       });
+
+      setMenuOpen(false);
     }
   };
 
@@ -66,21 +75,21 @@ export default function Navbar() {
           : "bg-[var(--blue-black)] backdrop-blur-sm"
       }`}
     >
-      <Container className="flex h-20 items-center justify-between">
+      <Container className="flex h-20 items-center justify-between max-lg:h-[158px]">
         {/* Logo */}
-        <Link href="/">
+        <Link href="/" onClick={() => setMenuOpen(false)}>
           <Image
             src="/logo/logo.png"
             alt="Adorsi"
             width={118}
             height={38}
-            className="h-auto"
+            className="h-auto max-lg:w-[95px]"
             priority
           />
         </Link>
 
-        {/* Center Links */}
-        <div className="hidden lg:flex items-center gap-9">
+        {/* Desktop Links */}
+        <div className="hidden items-center gap-9 lg:flex">
           {links.map((item) => (
             <Link
               key={item.name}
@@ -98,25 +107,72 @@ export default function Navbar() {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-5">
-          <button className="cursor-pointer">
+        <div className="flex items-center gap-5 max-lg:gap-[13px]">
+          {/* Cart */}
+          <button
+            type="button"
+            className="cursor-pointer"
+            aria-label="Cart"
+          >
             <Image
               src="/logo/cart.svg"
               alt="Cart"
               width={22}
               height={22}
-              className="brightness-0 invert"
+              className="brightness-0 invert max-lg:h-[18px] max-lg:w-[18px]"
             />
           </button>
 
+          {/* Desktop Order Button */}
           <Link
             href="/menu"
-            className="rounded-full bg-[var(--gold)] px-6 py-3 text-sm font-medium text-black transition hover:opacity-90"
+            className="rounded-full bg-[var(--gold)] px-6 py-3 text-sm font-medium text-black transition hover:opacity-90 max-lg:hidden"
           >
             Order Now
           </Link>
+
+          {/* Mobile Hamburger */}
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="hidden h-[25px] w-[25px] items-center justify-center max-lg:flex"
+          >
+            <span className="flex w-[20px] flex-col gap-[4px]">
+              <span className="h-[1.5px] w-full bg-[#F2F0EA]" />
+              <span className="h-[1.5px] w-full bg-[#F2F0EA]" />
+              <span className="h-[1.5px] w-full bg-[#F2F0EA]" />
+            </span>
+          </button>
         </div>
       </Container>
+
+      {/* Mobile Menu */}
+      <div
+        className={`overflow-hidden border-t border-[#344056] transition-all duration-300 lg:hidden ${
+          menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="bg-[var(--blue-black)] px-[48px] py-[28px]">
+          <div className="flex flex-col gap-[24px]">
+            {links.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={
+                  item.href.startsWith("/#")
+                    ? (event) => handleHomeAnchor(event, item.href)
+                    : () => setMenuOpen(false)
+                }
+                className="font-inter text-[18px] leading-none text-[#F2F0EA]"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }

@@ -36,30 +36,35 @@ export default function Footer() {
               >
                 About Us
               </Link>
+
               <Link
                 href="#"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
               >
                 Menu
               </Link>
+
               <Link
                 href="#"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
               >
                 Events
               </Link>
+
               <Link
                 href="#"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
               >
                 News
               </Link>
+
               <Link
                 href="#"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
               >
                 Signature
               </Link>
+
               <Link
                 href="#"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
@@ -81,12 +86,14 @@ export default function Footer() {
               >
                 @adorsicoffee
               </a>
+
               <a
                 href="tel:+251945428888"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
               >
                 +251 945 428 888
               </a>
+
               <a
                 href="#"
                 className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
@@ -100,8 +107,8 @@ export default function Footer() {
         {/* Divider */}
         <div className="mt-[62px] h-px w-full bg-[#2B3547]" />
 
-        {/* Bottom row — aligned with upper section */}
-        <div className="grid grid-cols-[1.65fr_0.75fr_0.9fr] pt-[34px]">
+        {/* Bottom row */}
+        <div className="grid grid-cols-[1.65fr_0.75fr_0.9fr] pt-[34px] max-md:flex max-md:flex-col max-md:gap-[18px]">
           <p className="font-inter text-[12px] text-[#748095]">
             © 2026 Adorsi Specialty Coffee
           </p>
