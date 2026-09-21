@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Container from "@/components/common/Container";
 
 export default function NewsArticlePage() {
   return (
@@ -9,7 +10,8 @@ export default function NewsArticlePage() {
 
       <main className="bg-[#1D2636]">
         <section>
-          <div className="mx-auto w-full max-w-[846px] px-6 pb-[175px] pt-[180px] sm:px-8 lg:px-0">
+          <Container className="pb-[175px] pt-[180px]">
+            <div className="max-w-[846px]">
             {/* BACK */}
             <Link
               href="/news"
@@ -44,7 +46,8 @@ export default function NewsArticlePage() {
                 well-deserved recognition!
               </p>
             </div>
-          </div>
+            </div>
+          </Container>
         </section>
       </main>
 

@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Container from "../common/Container";
 
 export default function Hero() {
   return (
@@ -26,8 +27,8 @@ export default function Hero() {
 
       {/* Hero Content */}
       <div className="relative z-10 flex h-full items-center">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
-          <div className="max-w-2xl pt-60 lg:ml-16 lg:pt-72">
+        <Container>
+          <div className="max-w-2xl pt-60 lg:pt-72">
             <h1 className="font-heading text-6xl leading-[1.04] text-white md:text-[86px]">
               Welcome to{" "}
               <span className="text-[var(--gold)]">Adorsi</span>
@@ -55,7 +56,7 @@ export default function Hero() {
               </Link>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </section>
   );

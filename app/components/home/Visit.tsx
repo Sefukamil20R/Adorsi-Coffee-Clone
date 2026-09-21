@@ -1,3 +1,5 @@
+import Container from "../common/Container";
+
 const visitItems = [
   {
     icon: "/visit/location.svg",
@@ -53,7 +55,7 @@ function GoldIcon({
 export default function Visit() {
   return (
     <section id="visit" className="bg-[#1D2636]">
-      <div className="mx-auto w-full max-w-[1272px] px-6 py-[86px] sm:px-8 lg:px-0">
+      <Container className="py-[86px]">
         {/* Heading */}
         <div className="text-center">
           <div className="flex items-center justify-center gap-3">
@@ -76,7 +78,7 @@ export default function Visit() {
         </div>
 
         {/* Visit card */}
-        <div className="mx-auto mt-[64px] grid w-full max-w-[1090px] overflow-hidden border border-[#344056] bg-[#283347] md:grid-cols-3">
+        <div className="mt-[64px] grid w-full overflow-hidden border border-[#344056] bg-[#283347] md:grid-cols-3">
           {/* Find us / Hours */}
           {visitItems.map((item) => (
             <div
@@ -129,7 +131,7 @@ export default function Visit() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

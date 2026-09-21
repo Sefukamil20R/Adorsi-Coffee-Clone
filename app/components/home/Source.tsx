@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Container from "../common/Container";
 
 export default function Source() {
   return (
     <section id="source" className="bg-[#1D2636]">
-      <div className="mx-auto flex min-h-screen w-full items-center justify-center px-6 py-[100px] sm:px-10 lg:px-16">
-        <div className="flex w-full max-w-[1175px] items-center justify-center gap-[45px]">
+      <Container className="flex min-h-screen items-center py-[100px]">
+        <div className="flex w-full items-center justify-center gap-[45px]">
           {/* Left content */}
           <div className="w-[570px] shrink-0">
             <div className="mb-[34px] flex items-center gap-[16px]">
@@ -53,7 +54,7 @@ export default function Source() {
             />
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

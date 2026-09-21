@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Container from "@/components/common/Container";
 
 export default function NewsPage() {
   return (
@@ -9,7 +10,8 @@ export default function NewsPage() {
 
       <main className="bg-[#1D2636]">
         <section>
-      <div className="mx-auto w-full max-w-[1140px] px-6 pb-[185px] pt-[170px] sm:px-8 lg:px-0">            {/* HEADER */}
+          <Container className="pb-[185px] pt-[170px]">
+            {/* HEADER */}
             <div>
               <div className="flex items-center gap-[14px]">
                 <span className="h-px w-[43px] bg-[#B89A67]" />
@@ -56,7 +58,7 @@ export default function NewsPage() {
                 </Link>
               </article>
             </div>
-          </div>
+          </Container>
         </section>
       </main>
 

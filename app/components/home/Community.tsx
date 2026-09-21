@@ -1,9 +1,10 @@
 import NewsCard from "@/components/common/NewsCard";
+import Container from "../common/Container";
 
 export default function Community() {
   return (
     <section className="bg-[#283347]">
-      <div className="mx-auto w-full max-w-[1024px] px-6 py-[68px] sm:px-8 lg:px-0">
+      <Container className="py-[68px]">
         {/* Section introduction */}
         <div>
           <div className="mb-7 flex items-center gap-3">
@@ -83,7 +84,7 @@ export default function Community() {
             title="The best coffee shops in Addis"
           />
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

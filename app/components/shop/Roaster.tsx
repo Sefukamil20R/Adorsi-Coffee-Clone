@@ -1,15 +1,16 @@
 import Image from "next/image";
+import Container from "../common/Container";
 
 export default function Roaster() {
   return (
     <section className="bg-[#1D2636]">
-      <div className="mx-auto w-full max-w-[1080px] px-6 pb-[105px] pt-[58px] sm:px-8 lg:px-0">
+      <Container className="pb-[105px] pt-[58px]">
         {/* Divider */}
         <div className="h-px w-full bg-[#2B3547]" />
 
         {/* Space after divider before the entire second section */}
    <div className="relative mt-[170px] min-h-[640px]">          {/* LEFT TEXT */}
-          <div className="lg:-ml-[65px] lg:w-[650px]">
+          <div className="lg:w-[650px]">
             <h2 className="font-cormorant text-[49px] leading-[1] text-[#F2F0EA]">
               The Adorsi Roaster
             </h2>
@@ -107,7 +108,7 @@ export default function Roaster() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

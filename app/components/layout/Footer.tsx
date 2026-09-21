@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import Container from "../common/Container";
 
 export default function Footer() {
   return (
     <footer className="bg-[#1D2636]">
-      <div className="mx-auto w-full max-w-[1080px] px-6 pb-[38px] pt-[96px] sm:px-8 lg:px-0">
+      <Container className="pb-[38px] pt-[96px]">
         {/* Upper footer */}
         <div className="grid gap-8 md:grid-cols-[1.65fr_0.75fr_0.9fr]">
           <div>
@@ -109,7 +110,7 @@ export default function Footer() {
             Crafted in Addis Ababa
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MenuCard from "@/components/menu/MenuCard";
+import Container from "@/components/common/Container";
 
 const menuItems = [
   {
@@ -54,7 +55,8 @@ export default function MenuPage() {
 
       <main className="bg-[#1D2636]">
         <section>
-<div className="mx-auto w-full max-w-[1220px] px-6 pb-[100px] pt-[145px] sm:px-8 lg:px-0">        {/* MENU INTRO */}
+          <Container className="pb-[100px] pt-[145px]">
+            {/* MENU INTRO */}
            <div className="mt-[35px] grid items-end gap-10 lg:grid-cols-[1fr_390px]">
               {/* Left */}
               <div>
@@ -252,7 +254,7 @@ export default function MenuPage() {
     />
   ))}
 </div>
-          </div>
+          </Container>
         </section>
       </main>
 

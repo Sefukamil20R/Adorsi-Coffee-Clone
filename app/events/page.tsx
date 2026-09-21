@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Container from "@/components/common/Container";
 
 export default function EventsPage() {
   return (
@@ -8,7 +9,8 @@ export default function EventsPage() {
 
       <main className="bg-[#1D2636]">
         <section>
-<div className="mx-auto w-full max-w-[1140px] px-6 pb-[190px] pt-[190px] sm:px-8 lg:px-0">            {/* HEADER */}
+          <Container className="pb-[190px] pt-[190px]">
+            {/* HEADER */}
             <div>
               <div className="flex items-center gap-[13px]">
                 <span className="h-px w-[43px] bg-[#B89A67]" />
@@ -124,7 +126,7 @@ export default function EventsPage() {
                 </button>
               </div>
             </div>
-          </div>
+          </Container>
         </section>
       </main>
 

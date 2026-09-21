@@ -1,9 +1,10 @@
 import ProductCard from "@/components/shop/ProductCard";
+import Container from "../common/Container";
 
 export default function ShopProducts() {
   return (
     <section className="bg-[#1D2636]">
-      <div className="mx-auto w-full max-w-[1080px] px-6 pb-[96px] pt-[108px] sm:px-8 lg:px-0">
+      <Container className="pb-[96px] pt-[108px]">
         <div className="text-center">
           <div className="flex items-center justify-center gap-[13px]">
             <span className="h-px w-[38px] bg-[#8E7652]" />
@@ -42,7 +43,7 @@ export default function ShopProducts() {
             description="Premium Ethiopian Coffee : 500g"
           />
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
