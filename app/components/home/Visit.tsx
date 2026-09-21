@@ -1,0 +1,135 @@
+const visitItems = [
+  {
+    icon: "/visit/location.svg",
+    label: "Find us",
+    content: (
+      <>
+        Addis Ababa
+        <br />
+        adorsispecialtycoffee.com
+      </>
+    ),
+  },
+  {
+    icon: "/visit/time.svg",
+    label: "Hours",
+    content: (
+      <>
+        Open Daily
+        <br />
+        7:00 to 21:00
+      </>
+    ),
+  },
+];
+
+function GoldIcon({
+  src,
+  size = 23,
+}: {
+  src: string;
+  size?: number;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className="block shrink-0 bg-[#B89A67]"
+      style={{
+        width: size,
+        height: size,
+        maskImage: `url("${src}")`,
+        WebkitMaskImage: `url("${src}")`,
+        maskRepeat: "no-repeat",
+        WebkitMaskRepeat: "no-repeat",
+        maskPosition: "center",
+        WebkitMaskPosition: "center",
+        maskSize: "contain",
+        WebkitMaskSize: "contain",
+      }}
+    />
+  );
+}
+
+export default function Visit() {
+  return (
+    <section id="visit" className="bg-[#1D2636]">
+      <div className="mx-auto w-full max-w-[1272px] px-6 py-[86px] sm:px-8 lg:px-0">
+        {/* Heading */}
+        <div className="text-center">
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-px w-[42px] bg-[#B89A67]" />
+
+            <span className="font-inter text-[9px] font-medium uppercase tracking-[0.3em] text-[#B89A67]">
+              Visit
+            </span>
+
+            <span className="h-px w-[42px] bg-[#B89A67]" />
+          </div>
+
+          <h2 className="mt-[32px] font-cormorant text-[46px] leading-none text-[#F2F0EA] sm:text-[50px]">
+            Come pour with us.
+          </h2>
+
+          <p className="mt-[27px] font-inter text-[14px] leading-[1.5] text-[#C7CFD8]">
+            We&apos;re open every day. Stay for a quiet morning, or grab and go.
+          </p>
+        </div>
+
+        {/* Visit card */}
+        <div className="mx-auto mt-[64px] grid w-full max-w-[1090px] overflow-hidden border border-[#344056] bg-[#283347] md:grid-cols-3">
+          {/* Find us / Hours */}
+          {visitItems.map((item) => (
+            <div
+              key={item.label}
+              className="min-h-[250px] border-b border-[#344056] px-[40px] py-[36px] md:border-b-0 md:border-r"
+            >
+              <GoldIcon src={item.icon} size={23} />
+
+              <p className="mt-[22px] font-inter text-[9px] font-medium uppercase tracking-[0.28em] text-[#929CAC]">
+                {item.label}
+              </p>
+
+              <div className="mt-[12px] font-cormorant text-[17px] font-normal leading-[1.5] text-[#F2F0EA]">
+                {item.content}
+              </div>
+            </div>
+          ))}
+
+          {/* Reach us */}
+          <div className="min-h-[250px] px-[40px] py-[36px]">
+            <GoldIcon src="/visit/call.svg" size={23} />
+
+            <p className="mt-[22px] font-inter text-[9px] font-medium uppercase tracking-[0.28em] text-[#929CAC]">
+              Reach us
+            </p>
+
+            <div className="mt-[12px] font-cormorant text-[17px] font-normal leading-[1.5] text-[#F2F0EA]">
+              +251 945 428 888
+              <br />
+              @adorsicoffee
+            </div>
+
+            {/* Social icons */}
+            <div className="mt-[20px] flex items-center gap-3">
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#B89A67] bg-[#45484E] transition-opacity hover:opacity-80"
+              >
+                <GoldIcon src="/visit/ig.svg" size={15} />
+              </a>
+
+              <a
+                href="#"
+                aria-label="TikTok"
+                className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#B89A67] bg-[#45484E] transition-opacity hover:opacity-80"
+              >
+                <GoldIcon src="/visit/tiktok.svg" size={15} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
