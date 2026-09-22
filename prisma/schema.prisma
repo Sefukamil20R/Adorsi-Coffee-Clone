@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model MenuItem {
+  id          String  @id
+  name        String
+  price       Int
+  category    String
+  tag         String?
+  description String?
+
+  @@index([category])
+  @@index([tag])
+  @@index([price])
+  @@index([name])
+}

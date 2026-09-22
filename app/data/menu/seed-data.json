@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "menu-item-sig-anaerobic",
+    "name": "Adorsi Anaerobic",
+    "price": 500,
+    "category": "Signature",
+    "tag": "Signature",
+    "description": "Single-origin Yirgacheffe from Aricha. Adorsi washing station. Anaerobic process."
+  },
+  {
+    "id": "menu-item-sig-roast",
+    "name": "Roasting Experience Room",
+    "price": 3000,
+    "category": "Signature",
+    "tag": "Signature",
+    "description": "Roast your own green beans. Guided journey from green to aromatic roast."
+  },
+  {
+    "id": "menu-item-sig-ube-cloud",
+    "name": "Ube Coconut Cloud",
+    "price": 670,
+    "category": "Signature",
+    "tag": "New",
+    "description": "Filipino purple yam blended with creamy coconut milk. Sweet notes of vanilla and caramel."
+  },
+  {
+    "id": "menu-item-fc-anaerobic",
+    "name": "Adorsi Anaerobic",
+    "price": 500,
+    "category": "Filter Coffee",
+    "tag": null,
+    "description": "Yirgacheffe · Aricha · Adorsi station · Anaerobic."
+  },
+  {
+    "id": "menu-item-fc-ayla",
+    "name": "Ayla Bombe Washed",
+    "price": 500,
+    "category": "Filter Coffee",
+    "tag": null,
+    "description": "Sidama · Aricha · Ayla station · Washed process."
+  },
+  {
+    "id": "menu-item-fc-deri",
+    "name": "Deri Fahmi Natural",
+    "price": 500,
+    "category": "Filter Coffee",
+    "tag": null,
+    "description": "Guji · Aricha · Deri Fahmi station · Natural process."
+  },
+  {
+    "id": "menu-item-fc-gotiti",
+    "name": "Gotiti Honey",
+    "price": 549,
+    "category": "Filter Coffee",
+    "tag": null,
+    "description": "Sidama · Gedeb · Huke station · Honey process."
+  },
+  {
+    "id": "menu-item-bc-americano",
+    "name": "Americano",
+    "price": 250,
+    "category": "Black Coffee",
+    "tag": null,
+    "description": "Smooth espresso diluted with hot water for a light, balanced coffee."
+  },
+  {
+    "id": "menu-item-bc-espresso",
+    "name": "Espresso",
+    "price": 250,
+    "category": "Black Coffee",
+    "tag": null,
+    "description": "Rich and bold, a concentrated shot of freshly brewed coffee."
+  },
+  {
+    "id": "menu-item-bc-iced-americano",
+    "name": "Iced Americano",
+    "price": 300,
+    "category": "Black Coffee",
+    "tag": null,
+    "description": "Smooth espresso poured over ice and water for a light, refreshing coffee."
+  },
+  {
+    "id": "menu-item-mc-affogato",
+    "name": "Affogato",
+    "price": 700,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "Hot espresso poured over creamy vanilla ice cream for a rich, indulgent treat."
+  },
+  {
+    "id": "menu-item-mc-cappuccino",
+    "name": "Cappuccino",
+    "price": 550,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "Double espresso and steamed milk with a layer of cocoa powder."
+  },
+  {
+    "id": "menu-item-mc-flatwhite",
+    "name": "Flat White",
+    "price": 400,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "Double espresso, steamed milk, and a thin velvety microfoam with more pronounced coffee flavour."
+  },
+  {
+    "id": "menu-item-mc-latte-hot",
+    "name": "Latte (Hot)",
+    "price": 500,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "The most milky of all milk-based a big cup of tender milk with a single shot of espresso."
+  },
+  {
+    "id": "menu-item-mc-latte-iced",
+    "name": "Latte (Iced)",
+    "price": 500,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "A classic latte reimagined cold. Refreshing big cup of milk with a single shot of espresso."
+  },
+  {
+    "id": "menu-item-mc-macchiato",
+    "name": "Macchiato",
+    "price": 250,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "An Italian classic turned Ethiopian. Great balance of double espresso and milk."
+  },
+  {
+    "id": "menu-item-mc-piccolo",
+    "name": "Piccolo",
+    "price": 250,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "A single espresso shot with steamed milk. Tender and more pronounced milky flavour."
+  },
+  {
+    "id": "menu-item-sig-sky",
+    "name": "Sky Latte (Iced)",
+    "price": 510,
+    "category": "Milk Coffee",
+    "tag": "Signature",
+    "description": "Light and airy, layered espresso and milk, infused with sweet blue notes and a creamy cloud finish."
+  },
+  {
+    "id": "menu-item-mc-sky",
+    "name": "Sky Latte (Iced)",
+    "price": 650,
+    "category": "Milk Coffee",
+    "tag": "Signature",
+    "description": "Layered espresso and milk, infused with sweet blue notes and a creamy cloud finish."
+  },
+  {
+    "id": "menu-item-mc-spanish-hot",
+    "name": "Spanish Latte (Hot)",
+    "price": 500,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "Double espresso with sweetened steamed milk, finished with a light cocoa layer."
+  },
+  {
+    "id": "menu-item-mc-spanish-iced",
+    "name": "Spanish Latte (Iced)",
+    "price": 750,
+    "category": "Milk Coffee",
+    "tag": null,
+    "description": "Double espresso poured over ice with sweetened milk and a touch of cocoa."
+  },
+  {
+    "id": "menu-item-mc-ube-cloud",
+    "name": "Ube Coconut Cloud (Iced)",
+    "price": 850,
+    "category": "Milk Coffee",
+    "tag": "New",
+    "description": "Filipino purple yam blended with creamy coconut milk. Vanilla and caramel notes."
+  },
+  {
+    "id": "menu-item-nc-mango-cloud",
+    "name": "Mango Cloud (Iced)",
+    "price": 750,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Fresh mango, milk, and ice finished with a soft cloud topping."
+  },
+  {
+    "id": "menu-item-nc-matcha-hot",
+    "name": "Matcha Latte (Hot)",
+    "price": 600,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Finely ground green tea from shade-grown leaves brewed with milk. Naturally sweet."
+  },
+  {
+    "id": "menu-item-nc-matcha-iced",
+    "name": "Matcha Latte (Iced)",
+    "price": 800,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Shade-grown green tea served over ice with milk. Naturally sweet."
+  },
+  {
+    "id": "menu-item-nc-raspberry-matcha",
+    "name": "Raspberry Matcha Cloud (Iced)",
+    "price": 750,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Smooth matcha blended with raspberry and milk light, creamy, fruity."
+  },
+  {
+    "id": "menu-item-nc-smurf-hot",
+    "name": "Smurf Latte (Hot)",
+    "price": 600,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Vibrant blue matcha blended with milk. Naturally sweet and creamy."
+  },
+  {
+    "id": "menu-item-nc-smurf-iced",
+    "name": "Smurf Latte (Iced)",
+    "price": 750,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Bright blue matcha served over ice with milk."
+  },
+  {
+    "id": "menu-item-nc-strawberry-matcha",
+    "name": "Strawberry Matcha Cloud (Iced)",
+    "price": 580,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Iced matcha blended with strawberry and milk. Creamy, fruity refreshment."
+  },
+  {
+    "id": "menu-item-nc-ube-hot",
+    "name": "Ube Latte (Hot)",
+    "price": 750,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Filipino purple yam blended with milk. Vibrant and sweet with vanilla & caramel notes."
+  },
+  {
+    "id": "menu-item-nc-ube-iced",
+    "name": "Ube Latte (Iced)",
+    "price": 700,
+    "category": "Non-Coffee",
+    "tag": null,
+    "description": "Filipino purple yam blended with milk and served over ice."
+  },
+  {
+    "id": "menu-item-sh-biscoff",
+    "name": "Biscoff Milkshake",
+    "price": 950,
+    "category": "Cold & Shakes",
+    "tag": null,
+    "description": "Creamy, blended Biscoff. Rich and indulgent."
+  },
+  {
+    "id": "menu-item-6d8fde98-3f09-4ab1-8975-80bc9e5d4108",
+    "name": "mango cream smoothie",
+    "price": 550,
+    "category": "Cold & Shakes",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-sh-oreo",
+    "name": "Oreo Milkshake",
+    "price": 950,
+    "category": "Cold & Shakes",
+    "tag": null,
+    "description": "Cookies & cream classic, blended cold."
+  },
+  {
+    "id": "menu-item-69b2dfa8-4bd3-49d7-9ddb-348fbcc85ec5",
+    "name": "strawberry cream smoothie",
+    "price": 650,
+    "category": "Cold & Shakes",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-sh-strawberry",
+    "name": "Strawberry Milkshake",
+    "price": 650,
+    "category": "Cold & Shakes",
+    "tag": null,
+    "description": "Fresh strawberries blended with milk."
+  },
+  {
+    "id": "menu-item-sh-ube",
+    "name": "Ube Milkshake",
+    "price": 810,
+    "category": "Cold & Shakes",
+    "tag": null,
+    "description": "Filipino purple yam blended into a creamy shake."
+  },
+  {
+    "id": "menu-item-f-cappuccino",
+    "name": "Fasting Cappuccino",
+    "price": 950,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-flatwhite",
+    "name": "Fasting Flat White",
+    "price": 700,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-latte-hot",
+    "name": "Fasting Latte (Hot)",
+    "price": 1100,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-latte-iced",
+    "name": "Fasting Latte (Iced)",
+    "price": 850,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-macchiato",
+    "name": "Fasting Macchiato",
+    "price": 510,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-matcha-hot",
+    "name": "Fasting Matcha Latte (Hot)",
+    "price": 1200,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-matcha-iced",
+    "name": "Fasting Matcha Latte (Iced)",
+    "price": 900,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-piccolo",
+    "name": "Fasting Piccolo",
+    "price": 510,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-smurf-hot",
+    "name": "Fasting Smurf Latte (Hot)",
+    "price": 1200,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-smurf-iced",
+    "name": "Fasting Smurf Latte (Iced)",
+    "price": 860,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-ube-hot",
+    "name": "Fasting Ube Latte (Hot)",
+    "price": 1100,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-f-ube-iced",
+    "name": "Fasting Ube Latte (Iced)",
+    "price": 1020,
+    "category": "Fasting",
+    "tag": "Fasting",
+    "description": null
+  },
+  {
+    "id": "menu-item-76897f6e-cef5-4a0f-99f6-b7ff12948787",
+    "name": "adorsi mix herbal tea",
+    "price": 550,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": "freshly sliced lemons with mint."
+  },
+  {
+    "id": "menu-item-ref-ambo",
+    "name": "Ambo",
+    "price": 95,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-brazilian",
+    "name": "Brazilian Lemonade",
+    "price": 550,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-cascara",
+    "name": "Cascara Tonic",
+    "price": 600,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-mojito-cinnamon",
+    "name": "Cinnamon Mojito",
+    "price": 600,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-mojito-classic",
+    "name": "Classic Mojito",
+    "price": 600,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-tea-forever",
+    "name": "Forever Young Herbal Tea",
+    "price": 550,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": "Rose buds, Rose petals, Fennel seeds, Hibiscus, Chamomile."
+  },
+  {
+    "id": "menu-item-ref-ginger",
+    "name": "Ginger Lemonade",
+    "price": 450,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-tea-immunity",
+    "name": "Immunity Herbal Tea",
+    "price": 550,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": "Ashwagandha, Mekmeko, Holy Basil, Turmeric, Black Pepper, Ginger."
+  },
+  {
+    "id": "menu-item-ref-mojito-lemon",
+    "name": "Lemon Mojito",
+    "price": 600,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-lychee",
+    "name": "Lychee Lemonade",
+    "price": 315,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-534f05ab-4ea9-4a27-8a83-bbb3cede5227",
+    "name": "moringa mint tea",
+    "price": 550,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": "moringa peppermint, holy basil, cinnamon."
+  },
+  {
+    "id": "menu-item-ref-rosemary",
+    "name": "Rosemary Lemonade",
+    "price": 500,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-mojito-strawberry",
+    "name": "Strawberry Mojito",
+    "price": 650,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-water-05",
+    "name": "Water 0.5L",
+    "price": 90,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ref-water-1l",
+    "name": "Water 1L",
+    "price": 95,
+    "category": "Tea & Refreshments",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-bf-banana-pancakes",
+    "name": "Banana Oatmeal Pancakes",
+    "price": 710,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Soft, fluffy and naturally sweet freshly made to perfection."
+  },
+  {
+    "id": "menu-item-4d907f6d-f316-48c8-b67b-0bd94e839b62",
+    "name": "cheese omelette croissant",
+    "price": 750,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Buttery croissant with a fluffy omelette and melted cheese."
+  },
+  {
+    "id": "menu-item-bf-cheese-croissant",
+    "name": "Cheese Omelette Croissant",
+    "price": 645,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Buttery croissant filled with fluffy omelette and melted cheese."
+  },
+  {
+    "id": "menu-item-bf-french-toast",
+    "name": "French Toast",
+    "price": 690,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Golden-grilled bread dipped in eggs and milk, lightly sweet and soft inside."
+  },
+  {
+    "id": "menu-item-6ec93f3c-7d41-4c43-b734-eeeff1c0d0d9",
+    "name": "fruit omelette",
+    "price": 500,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "a perfectly cooked omelette accompanied by fresh, juicy seasonal fruits."
+  },
+  {
+    "id": "menu-item-bf-pancakes",
+    "name": "Golden American Pancakes",
+    "price": 500,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Fluffy, thick pancakes cooked until golden and perfectly soft."
+  },
+  {
+    "id": "menu-item-bf-omelette",
+    "name": "Omelette",
+    "price": 600,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Lightly beaten eggs cooked to perfection, folded and seasoned simply."
+  },
+  {
+    "id": "menu-item-b0474e4b-3b31-4ef2-a315-2343edfb9fa9",
+    "name": "pancake",
+    "price": 750,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "eggs gently fried with a firm white and a soft, runny yolk."
+  },
+  {
+    "id": "menu-item-bf-scramble",
+    "name": "Scrambled Egg",
+    "price": 500,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Soft, fluffy eggs cooked gently until creamy and light."
+  },
+  {
+    "id": "menu-item-bf-sunny",
+    "name": "Sunny Side Up",
+    "price": 500,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Eggs gently fried with a firm white and soft, runny yolk."
+  },
+  {
+    "id": "menu-item-1e574635-a5a9-40f8-8cf8-dade44b16f30",
+    "name": "tamagoyaki Japanese omelette",
+    "price": 900,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "A delicate rolled Japanese omelette with a soft fluffy texture and subtle savory-sweet flavor."
+  },
+  {
+    "id": "menu-item-bf-waffle",
+    "name": "Waffle",
+    "price": 600,
+    "category": "Breakfast",
+    "tag": null,
+    "description": "Crispy outside, soft inside. Freshly made."
+  },
+  {
+    "id": "menu-item-sn-avocado",
+    "name": "Avocado Toast",
+    "price": 650,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Toasted bread topped with creamy, ripe avocado and a hint of seasoning."
+  },
+  {
+    "id": "menu-item-sn-avocado-egg",
+    "name": "Avocado Toast with Fried Egg",
+    "price": 900,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Avocado toast with a perfectly fried egg."
+  },
+  {
+    "id": "menu-item-sn-cheese-steak",
+    "name": "Cheese Steak Sandwich",
+    "price": 1500,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Tender slices of beef with melted cheese, served in a toasted sandwich."
+  },
+  {
+    "id": "menu-item-sn-chicken-wrap",
+    "name": "Chicken Pesto Wrap",
+    "price": 1500,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Grilled chicken and fresh veggies wrapped with zesty pesto."
+  },
+  {
+    "id": "menu-item-sn-falafel",
+    "name": "Falafel with Hummus",
+    "price": 700,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Crispy chickpea patties with creamy hummus."
+  },
+  {
+    "id": "menu-item-sn-burger",
+    "name": "gourmet chicken burger",
+    "price": 1650,
+    "category": "Snacks",
+    "tag": null,
+    "description": "juicy grilled chicken layered with smoky BBQ sauce, fresh lettuce and melted cheese in a toasted bun."
+  },
+  {
+    "id": "menu-item-f9f77f13-2b71-422a-801f-4380aa74c59a",
+    "name": "granola yogurt bawl",
+    "price": 1025,
+    "category": "Snacks",
+    "tag": null,
+    "description": "creamy yogurt topped with crunchy granola and fresh seasonal fruit."
+  },
+  {
+    "id": "menu-item-sn-grilled-veg",
+    "name": "Grilled Vegetable Sandwich",
+    "price": 650,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Assorted grilled vegetables in fresh bread."
+  },
+  {
+    "id": "menu-item-sn-hummus",
+    "name": "Hummus with Pita",
+    "price": 650,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Creamy chickpea dip served with warm, soft pita bread."
+  },
+  {
+    "id": "menu-item-sn-chicken-sliders",
+    "name": "Mini Chicken Sliders",
+    "price": 1600,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Tender mini chicken sliders, served warm."
+  },
+  {
+    "id": "menu-item-sn-mini-sliders",
+    "name": "Mini Sliders",
+    "price": 1500,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Bite-sized sliders, packed with flavor and served warm."
+  },
+  {
+    "id": "menu-item-b04bb448-9edb-4c76-94e9-259ba1d26e10",
+    "name": "pan-fried chicken sandwich",
+    "price": 1650,
+    "category": "Snacks",
+    "tag": null,
+    "description": "tender pan-fried chicken with crisp lettuce, fresh tomato, and your choice of sauce on toasted bread."
+  },
+  {
+    "id": "menu-item-sn-salmon-rose",
+    "name": "Salmon Rose",
+    "price": 2900,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Delicate smoked salmon, elegantly arranged."
+  },
+  {
+    "id": "menu-item-sn-steak-fries",
+    "name": "Steak Fries",
+    "price": 1880,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Classic steak fries perfectly crisp and full of flavor."
+  },
+  {
+    "id": "menu-item-sn-tuna",
+    "name": "Tuna Sandwich",
+    "price": 900,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Flaky tuna mixed with light seasoning between fresh bread slices."
+  },
+  {
+    "id": "menu-item-sn-veg-wrap",
+    "name": "Vegetable Pesto Wrap",
+    "price": 620,
+    "category": "Snacks",
+    "tag": null,
+    "description": "Fresh vegetables wrapped with flavorful pesto in a soft tortilla."
+  },
+  {
+    "id": "menu-item-sl-chicken",
+    "name": "Chicken Salad",
+    "price": 980,
+    "category": "Salads",
+    "tag": null,
+    "description": "Grilled chicken over crisp greens."
+  },
+  {
+    "id": "menu-item-sl-garden",
+    "name": "Garden Salad",
+    "price": 650,
+    "category": "Salads",
+    "tag": null,
+    "description": "Fresh greens and vegetables, light and healthy."
+  },
+  {
+    "id": "menu-item-sl-greek",
+    "name": "Greek Salad",
+    "price": 700,
+    "category": "Salads",
+    "tag": null,
+    "description": "Tomato, cucumber, olives, feta."
+  },
+  {
+    "id": "menu-item-sl-salmon",
+    "name": "Smoked Salmon Salad",
+    "price": 2400,
+    "category": "Salads",
+    "tag": null,
+    "description": "Smoked salmon over fresh greens."
+  },
+  {
+    "id": "menu-item-pa-biscoff-bliss",
+    "name": "Biscoff Bliss",
+    "price": 750,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-biscoff-cake",
+    "name": "Biscoff Cheesecake",
+    "price": 870,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-biscoff-croissant",
+    "name": "Biscoff Circle Croissant",
+    "price": 450,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-brownie",
+    "name": "Brownie with Ice Cream",
+    "price": 700,
+    "category": "Pastry",
+    "tag": null,
+    "description": "Brownie topped with ice cream and chocolate sauce."
+  },
+  {
+    "id": "menu-item-pa-chocolate",
+    "name": "Chocolate Cake",
+    "price": 560,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-honey",
+    "name": "Honey Cake",
+    "price": 570,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-oreo-cake",
+    "name": "Oreo Cheesecake",
+    "price": 680,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-2206532e-1cc8-4859-939f-c449ad73f807",
+    "name": "pistachio",
+    "price": 650,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-cheesecake",
+    "name": "Plain Cheesecake",
+    "price": 700,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-croissant",
+    "name": "Plain Croissant",
+    "price": 250,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-strawberry-cake",
+    "name": "Strawberry Cheesecake",
+    "price": 870,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-pa-tiramisu",
+    "name": "Tiramisu",
+    "price": 649,
+    "category": "Pastry",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ju-apple-carrot",
+    "name": "Apple &amp; Carrot",
+    "price": 700,
+    "category": "Juice",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ju-avocado",
+    "name": "Avocado Juice",
+    "price": 650,
+    "category": "Juice",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ju-green-apple",
+    "name": "Green Apple &amp; Cucumber",
+    "price": 950,
+    "category": "Juice",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ju-orange",
+    "name": "Orange Juice",
+    "price": 700,
+    "category": "Juice",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ju-papaya",
+    "name": "Papaya Juice",
+    "price": 450,
+    "category": "Juice",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ju-watermelon",
+    "name": "Watermelon Juice",
+    "price": 400,
+    "category": "Juice",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-caramel",
+    "name": "Caramel Syrup",
+    "price": 150,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-biscoff",
+    "name": "Extra Biscoff Biscuit",
+    "price": 70,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-egg",
+    "name": "Extra Egg",
+    "price": 55,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-honey",
+    "name": "Extra Honey",
+    "price": 30,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-mayo",
+    "name": "Extra Mayonnaise",
+    "price": 55,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-provolone",
+    "name": "Extra Provolone Cheese",
+    "price": 90,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-fries",
+    "name": "Fries",
+    "price": 170,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-cdc45c6b-63d5-42af-8ade-64178fc2e0b1",
+    "name": "mango juice",
+    "price": 500,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-takeaway-box",
+    "name": "Takeaway Box",
+    "price": 145,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-takeaway-cup",
+    "name": "Takeaway Cup",
+    "price": 50,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  },
+  {
+    "id": "menu-item-ex-vanilla",
+    "name": "Vanilla Syrup",
+    "price": 150,
+    "category": "Extras",
+    "tag": null,
+    "description": null
+  }
+]

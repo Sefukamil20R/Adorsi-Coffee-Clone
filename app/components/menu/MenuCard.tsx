@@ -7,6 +7,7 @@ type MenuCardProps = {
   price: string;
   description: string;
   tags: string[];
+  cartId?: string;
 };
 
 export default function MenuCard({
@@ -14,12 +15,13 @@ export default function MenuCard({
   price,
   description,
   tags,
+  cartId,
 }: MenuCardProps) {
   const { addToCart } = useCart();
 
   const handleAddToOrder = () => {
     addToCart({
-      id: title.toLowerCase().replace(/\s+/g, "-"),
+      id: cartId ?? title.toLowerCase().replace(/\s+/g, "-"),
       title,
       price,
       priceValue: parsePriceValue(price),

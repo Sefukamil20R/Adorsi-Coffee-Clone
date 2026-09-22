@@ -18,9 +18,10 @@ export type CartItem = {
   quantity: number;
 };
 
-type SnackbarState = {
-  productName: string;
-} | null;
+export type SnackbarState =
+  | { kind: "item-added"; productName: string }
+  | { kind: "receipt-submitted" }
+  | null;
 
 type CartContextValue = {
   items: CartItem[];
@@ -34,6 +35,8 @@ type CartContextValue = {
   viewCartFromSnackbar: () => void;
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
+  showReceiptSubmittedSnackbar: () => void;
   totalValue: number;
   totalLabel: string;
 };
@@ -64,17 +67,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setSnackbar(null);
   }, [clearSnackbarTimer]);
 
+  const scheduleSnackbarDismiss = useCallback(() => {
+    clearSnackbarTimer();
+    snackbarTimer.current = setTimeout(() => {
+      setSnackbar(null);
+      snackbarTimer.current = null;
+    }, SNACKBAR_DURATION_MS);
+  }, [clearSnackbarTimer]);
+
   const showSnackbar = useCallback(
     (productName: string) => {
-      clearSnackbarTimer();
-      setSnackbar({ productName });
-      snackbarTimer.current = setTimeout(() => {
-        setSnackbar(null);
-        snackbarTimer.current = null;
-      }, SNACKBAR_DURATION_MS);
+      setSnackbar({ kind: "item-added", productName });
+      scheduleSnackbarDismiss();
     },
-    [clearSnackbarTimer],
+    [scheduleSnackbarDismiss],
   );
+
+  const showReceiptSubmittedSnackbar = useCallback(() => {
+    setSnackbar({ kind: "receipt-submitted" });
+    scheduleSnackbarDismiss();
+  }, [scheduleSnackbarDismiss]);
 
   const addToCart = useCallback(
     (item: Omit<CartItem, "quantity">) => {
@@ -129,6 +141,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => prev.filter((entry) => entry.id !== id));
   }, []);
 
+  const clearCart = useCallback(() => {
+    setItems([]);
+  }, []);
+
   useEffect(() => {
     if (!drawerOpen) return;
 
@@ -168,6 +184,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       viewCartFromSnackbar,
       updateQuantity,
       removeItem,
+      clearCart,
+      showReceiptSubmittedSnackbar,
       totalValue,
       totalLabel,
     }),
@@ -183,6 +201,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       viewCartFromSnackbar,
       updateQuantity,
       removeItem,
+      clearCart,
+      showReceiptSubmittedSnackbar,
       totalValue,
       totalLabel,
     ],

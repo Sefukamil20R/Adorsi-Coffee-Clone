@@ -1,7 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartContext";
+
+const CBE_ACCOUNT = "1000722771552";
+const TELEBIRR_MERCHANT_ID = "528108";
+
+const RECEIPT_ACCEPT = "image/jpeg,image/jpg,image/png,image/webp";
 
 function CartIconGold({
   className = "h-[18px] w-[18px]",
@@ -97,10 +102,10 @@ function UploadIcon() {
 
 function DrawerHeader({ onClose }: { onClose: () => void }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#2A3344] px-6 py-5 max-md:px-5">
-      <div className="flex items-center gap-3">
-        <CartIconGold className="h-[18px] w-[18px]" />
-        <h2 className="font-heading text-[22px] leading-none text-[#F2F0EA]">
+    <div className="flex items-center justify-between border-b border-[#2A3344] px-6 py-4 max-md:px-5">
+      <div className="flex items-center gap-2.5">
+        <CartIconGold className="h-[16px] w-[16px]" />
+        <h2 className="font-heading text-[19px] leading-none text-[#F2F0EA]">
           Your Order
         </h2>
       </div>
@@ -108,7 +113,7 @@ function DrawerHeader({ onClose }: { onClose: () => void }) {
         type="button"
         onClick={onClose}
         aria-label="Close cart"
-        className="flex h-9 w-9 items-center justify-center rounded-full text-[#C7CFD8] transition hover:bg-white/5 hover:text-white"
+        className="flex h-8 w-8 items-center justify-center rounded-full text-[#C7CFD8] transition hover:bg-white/5 hover:text-white"
       >
         <CloseIcon />
       </button>
@@ -118,14 +123,14 @@ function DrawerHeader({ onClose }: { onClose: () => void }) {
 
 function EmptyCartBody() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 pb-16 pt-8 text-center max-md:px-5">
-      <div className="flex h-[88px] w-[88px] items-center justify-center rounded-[14px] border border-[#3D4659]">
-        <CartIconGold className="h-10 w-10" />
+    <div className="flex flex-1 flex-col items-center justify-center px-6 pb-14 pt-6 text-center max-md:px-5">
+      <div className="flex h-[80px] w-[80px] items-center justify-center rounded-[14px] border border-[#3D4659]">
+        <CartIconGold className="h-9 w-9" />
       </div>
-      <p className="mt-8 font-heading text-[26px] leading-tight text-[#F2F0EA]">
+      <p className="mt-6 font-heading text-[22px] leading-tight text-[#F2F0EA]">
         Your cup is empty.
       </p>
-      <p className="mt-3 max-w-[240px] font-inter text-[14px] leading-relaxed text-[#8995A9]">
+      <p className="mt-2 max-w-[240px] font-inter text-[13px] leading-relaxed text-[#8995A9]">
         Add something signature from the menu.
       </p>
     </div>
@@ -141,31 +146,48 @@ function PaymentCopyField({
   sublabel: string;
   value: string;
 }) {
-  const handleCopy = () => {
-    void navigator.clipboard?.writeText(value.replace(/\s/g, ""));
+  const [copied, setCopied] = useState(false);
+  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (copiedTimer.current) clearTimeout(copiedTimer.current);
+    },
+    [],
+  );
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      if (copiedTimer.current) clearTimeout(copiedTimer.current);
+      copiedTimer.current = setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3">
-        <p className="font-inter text-[13px] font-medium text-[#F2F0EA]">
+        <p className="font-inter text-[12px] font-medium text-[#F2F0EA]">
           {label}
         </p>
-        <p className="font-inter text-[9px] font-medium uppercase tracking-[0.14em] text-[#6B778A]">
+        <p className="font-inter text-[8px] font-medium uppercase tracking-[0.14em] text-[#6B778A]">
           {sublabel}
         </p>
       </div>
-      <div className="mt-2 flex h-[44px] items-stretch overflow-hidden rounded-[8px] border border-[#344056] bg-[#151C28]">
-        <span className="flex min-w-0 flex-1 items-center px-3 font-inter text-[14px] tracking-wide text-[#F2F0EA]">
+      <div className="mt-1.5 flex h-[40px] items-stretch overflow-hidden rounded-[8px] border border-[#344056] bg-[#151C28]">
+        <span className="flex min-w-0 flex-1 items-center px-3 font-inter text-[13px] tracking-wide text-[#F2F0EA]">
           {value}
         </span>
         <button
           type="button"
-          onClick={handleCopy}
-          className="flex shrink-0 items-center gap-1.5 border-l border-[#344056] px-3 font-inter text-[12px] font-medium text-[var(--gold)] transition hover:bg-white/[0.03]"
+          onClick={() => void handleCopy()}
+          className="flex shrink-0 items-center gap-1.5 border-l border-[#344056] px-3 font-inter text-[11px] font-medium text-[var(--gold)] transition hover:bg-white/[0.03]"
         >
           <CopyIcon />
-          Copy
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
     </div>
@@ -179,25 +201,109 @@ function CartWithItemsBody() {
     totalValue,
     updateQuantity,
     removeItem,
+    clearCart,
+    showReceiptSubmittedSnackbar,
   } = useCart();
   const [paymentMethod, setPaymentMethod] = useState<"bank" | "restaurant">(
     "bank",
   );
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [receiptFile, setReceiptFile] = useState<File | null>(null);
+  const [receiptPreviewUrl, setReceiptPreviewUrl] = useState<string | null>(
+    null,
+  );
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [receiptError, setReceiptError] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(
+    () => () => {
+      if (receiptPreviewUrl) URL.revokeObjectURL(receiptPreviewUrl);
+    },
+    [receiptPreviewUrl],
+  );
+
+  const openReceiptPicker = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleReceiptSelected = (file: File | undefined) => {
+    if (!file) return;
+
+    const isImage =
+      file.type.startsWith("image/") &&
+      (file.type === "image/jpeg" ||
+        file.type === "image/jpg" ||
+        file.type === "image/png" ||
+        file.type === "image/webp");
+
+    if (!isImage) return;
+
+    if (receiptPreviewUrl) URL.revokeObjectURL(receiptPreviewUrl);
+    setReceiptFile(file);
+    setReceiptPreviewUrl(URL.createObjectURL(file));
+    setReceiptError(false);
+  };
+
+  const handleSubmitReceipt = () => {
+    const trimmedName = fullName.trim();
+    const trimmedPhone = phone.trim();
+    let valid = true;
+
+    if (!receiptFile) {
+      setReceiptError(true);
+      valid = false;
+    }
+
+    if (!trimmedName) {
+      setNameError(true);
+      valid = false;
+    }
+
+    if (!trimmedPhone) {
+      setPhoneError(true);
+      valid = false;
+    }
+
+    if (!valid) {
+      if (!trimmedName) nameInputRef.current?.focus();
+      return;
+    }
+
+    if (receiptPreviewUrl) URL.revokeObjectURL(receiptPreviewUrl);
+    setReceiptFile(null);
+    setReceiptPreviewUrl(null);
+    setFullName("");
+    setPhone("");
+    setNameError(false);
+    setPhoneError(false);
+    setReceiptError(false);
+    setPaymentMethod("bank");
+
+    clearCart();
+    showReceiptSubmittedSnackbar();
+  };
+
+  const hasReceipt = Boolean(receiptPreviewUrl && receiptFile);
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-6 pb-8 pt-5 max-md:px-5">
-      <div className="space-y-6">
+    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-6 pb-7 pt-4 max-md:px-5">
+      <div className="space-y-5">
         {items.map((item) => {
           const lineTotal = item.priceValue * item.quantity;
 
           return (
-            <div key={item.id} className="border-b border-[#2A3344] pb-6">
+            <div key={item.id} className="border-b border-[#2A3344] pb-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-heading text-[20px] leading-tight text-[#F2F0EA]">
+                  <p className="font-heading text-[18px] leading-tight text-[#F2F0EA]">
                     {item.title}
                   </p>
-                  <p className="mt-1 font-inter text-[13px] text-[#8995A9]">
+                  <p className="mt-0.5 font-inter text-[12px] text-[#8995A9]">
                     {item.price}
                   </p>
                 </div>
@@ -205,25 +311,25 @@ function CartWithItemsBody() {
                   type="button"
                   onClick={() => removeItem(item.id)}
                   aria-label={`Remove ${item.title}`}
-                  className="font-inter text-[20px] leading-none text-[#6B778A] transition hover:text-[#F2F0EA]"
+                  className="font-inter text-[18px] leading-none text-[#6B778A] transition hover:text-[#F2F0EA]"
                 >
                   ×
                 </button>
               </div>
 
-              <div className="mt-4 flex items-center justify-between">
+              <div className="mt-3 flex items-center justify-between">
                 <div className="inline-flex items-center overflow-hidden rounded-md border border-[#344056]">
                   <button
                     type="button"
                     onClick={() =>
                       updateQuantity(item.id, item.quantity - 1)
                     }
-                    className="flex h-9 w-10 items-center justify-center font-inter text-[16px] text-[#C7CFD8] transition hover:bg-white/5"
+                    className="flex h-8 w-9 items-center justify-center font-inter text-[15px] text-[#C7CFD8] transition hover:bg-white/5"
                     aria-label="Decrease quantity"
                   >
                     −
                   </button>
-                  <span className="flex h-9 min-w-[36px] items-center justify-center border-x border-[#344056] font-inter text-[14px] text-[#F2F0EA]">
+                  <span className="flex h-8 min-w-[32px] items-center justify-center border-x border-[#344056] font-inter text-[13px] text-[#F2F0EA]">
                     {item.quantity}
                   </span>
                   <button
@@ -231,13 +337,13 @@ function CartWithItemsBody() {
                     onClick={() =>
                       updateQuantity(item.id, item.quantity + 1)
                     }
-                    className="flex h-9 w-10 items-center justify-center font-inter text-[16px] text-[#C7CFD8] transition hover:bg-white/5"
+                    className="flex h-8 w-9 items-center justify-center font-inter text-[15px] text-[#C7CFD8] transition hover:bg-white/5"
                     aria-label="Increase quantity"
                   >
                     +
                   </button>
                 </div>
-                <span className="font-inter text-[15px] text-[#F2F0EA]">
+                <span className="font-inter text-[14px] text-[#F2F0EA]">
                   {lineTotal}
                 </span>
               </div>
@@ -246,37 +352,52 @@ function CartWithItemsBody() {
         })}
       </div>
 
-      <div className="mt-6 border-t border-[#2A3344] pt-6">
+      <div className="mt-5 border-t border-[#2A3344] pt-5">
         <div className="flex items-end justify-between">
-          <p className="pb-0.5 font-inter text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--gold)]">
+          <p className="pb-0.5 font-inter text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--gold)]">
             Checkout • {itemCount} {itemCount === 1 ? "ITEM" : "ITEMS"}
           </p>
           <div className="flex items-baseline gap-1.5">
-            <span className="font-heading text-[30px] leading-none text-[#F2F0EA]">
+            <span className="font-heading text-[26px] leading-none text-[#F2F0EA]">
               {totalValue}
             </span>
-            <span className="font-inter text-[13px] text-[#8995A9]">ETB</span>
+            <span className="font-inter text-[12px] text-[#8995A9]">ETB</span>
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3">
+        <div className="mt-4 grid grid-cols-2 gap-2.5">
           <input
+            ref={nameInputRef}
             type="text"
             placeholder="Full name"
-            className="h-[44px] rounded-[8px] border border-[#344056] bg-[#151C28] px-3 font-inter text-[14px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none focus:border-[#435068]"
+            value={fullName}
+            onChange={(e) => {
+              setFullName(e.target.value);
+              if (e.target.value.trim()) setNameError(false);
+            }}
+            className={`h-[40px] rounded-[8px] border bg-[#151C28] px-3 font-inter text-[13px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none focus:border-[#435068] ${
+              nameError ? "border-[#B85C5C]" : "border-[#344056]"
+            }`}
           />
           <input
             type="tel"
             placeholder="Phone"
-            className="h-[44px] rounded-[8px] border border-[#344056] bg-[#151C28] px-3 font-inter text-[14px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none focus:border-[#435068]"
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              if (e.target.value.trim()) setPhoneError(false);
+            }}
+            className={`h-[40px] rounded-[8px] border bg-[#151C28] px-3 font-inter text-[13px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none focus:border-[#435068] ${
+              phoneError ? "border-[#B85C5C]" : "border-[#344056]"
+            }`}
           />
         </div>
 
-        <div className="mt-4 flex rounded-[10px] border border-[#344056] p-1">
+        <div className="mt-3.5 flex rounded-[10px] border border-[#344056] p-1">
           <button
             type="button"
             onClick={() => setPaymentMethod("bank")}
-            className={`h-[40px] flex-1 rounded-[8px] font-inter text-[13px] font-medium transition ${
+            className={`h-[36px] flex-1 rounded-[8px] font-inter text-[12px] font-medium transition ${
               paymentMethod === "bank"
                 ? "bg-[var(--gold)] text-[#1D2636]"
                 : "bg-transparent text-[#C7CFD8]"
@@ -287,7 +408,7 @@ function CartWithItemsBody() {
           <button
             type="button"
             onClick={() => setPaymentMethod("restaurant")}
-            className={`h-[40px] flex-1 rounded-[8px] font-inter text-[13px] font-medium transition ${
+            className={`h-[36px] flex-1 rounded-[8px] font-inter text-[12px] font-medium transition ${
               paymentMethod === "restaurant"
                 ? "bg-[var(--gold)] text-[#1D2636]"
                 : "bg-transparent text-[#C7CFD8]"
@@ -298,44 +419,78 @@ function CartWithItemsBody() {
         </div>
 
         {paymentMethod === "bank" && (
-          <div className="mt-4 rounded-[10px] border border-[#344056] p-4">
-            <p className="font-inter text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--gold)]">
+          <div className="mt-3.5 rounded-[10px] border border-[#344056] p-3.5">
+            <p className="font-inter text-[9px] font-medium uppercase tracking-[0.14em] text-[var(--gold)]">
               Pay {totalValue} ETB via
             </p>
 
-            <div className="mt-4 space-y-4">
+            <div className="mt-3 space-y-3">
               <PaymentCopyField
                 label="CBE Bank Account"
                 sublabel="Account number"
-                value="1000722771552"
+                value={CBE_ACCOUNT}
               />
               <PaymentCopyField
                 label="Telebirr"
                 sublabel="Merchant ID"
-                value="528108"
+                value={TELEBIRR_MERCHANT_ID}
               />
             </div>
 
-            <button
-              type="button"
-              className="mt-4 flex h-[44px] w-full items-center justify-center gap-2 rounded-[8px] border border-dashed border-[#435068] bg-transparent font-inter text-[13px] text-[#C7CFD8] transition hover:border-[#536075]"
-            >
-              <UploadIcon />
-              Upload receipt screenshot
-            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={RECEIPT_ACCEPT}
+              className="hidden"
+              onChange={(e) => {
+                handleReceiptSelected(e.target.files?.[0]);
+                e.target.value = "";
+              }}
+            />
+
+            {hasReceipt ? (
+              <div className="mt-3 overflow-hidden rounded-[8px] border border-[#344056] bg-[#151C28]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={receiptPreviewUrl!}
+                  alt="Receipt preview"
+                  className="max-h-[160px] w-full object-contain"
+                />
+              </div>
+            ) : null}
 
             <button
               type="button"
-              className="mt-3 h-[48px] w-full rounded-[10px] bg-[var(--gold)] font-inter text-[14px] font-medium text-[#1D2636] transition hover:opacity-90"
+              onClick={openReceiptPicker}
+              className={`mt-3 flex h-[40px] w-full items-center justify-center gap-2 rounded-[8px] border border-dashed bg-transparent font-inter text-[12px] transition hover:border-[#536075] ${
+                receiptError && !hasReceipt
+                  ? "border-[#B85C5C] text-[#C7CFD8]"
+                  : "border-[#435068] text-[#C7CFD8]"
+              }`}
+            >
+              <UploadIcon />
+              {hasReceipt ? "Change receipt" : "Upload receipt screenshot"}
+            </button>
+
+            {receiptError && !hasReceipt ? (
+              <p className="mt-1.5 font-inter text-[11px] text-[#B85C5C]">
+                Please upload a receipt image before submitting.
+              </p>
+            ) : null}
+
+            <button
+              type="button"
+              onClick={handleSubmitReceipt}
+              className="mt-2.5 h-[44px] w-full rounded-[10px] bg-[var(--gold)] font-inter text-[13px] font-medium text-[#1D2636] transition hover:opacity-90"
             >
               Submit receipt for approval
             </button>
           </div>
         )}
 
-        <div className="mt-6 flex items-center gap-3">
+        <div className="mt-5 flex items-center gap-3">
           <span className="h-px flex-1 bg-[#344056]" />
-          <span className="font-inter text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B778A]">
+          <span className="font-inter text-[9px] font-medium uppercase tracking-[0.14em] text-[#6B778A]">
             Or pay online
           </span>
           <span className="h-px flex-1 bg-[#344056]" />
@@ -343,7 +498,7 @@ function CartWithItemsBody() {
 
         <button
           type="button"
-          className="mt-4 flex h-[44px] w-full items-center justify-center rounded-[8px] border border-[#344056] bg-[#151C28] font-inter text-[13px] text-[#C7CFD8] transition hover:border-[#435068]"
+          className="mt-3.5 flex h-[40px] w-full items-center justify-center rounded-[8px] border border-[#344056] bg-[#151C28] font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
         >
           Pay Online with Chapa →
         </button>
