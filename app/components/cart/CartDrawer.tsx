@@ -121,12 +121,54 @@ function DrawerHeader({ onClose }: { onClose: () => void }) {
   );
 }
 
+function DrawerReceiptSnackbar() {
+  const { snackbar, dismissSnackbar } = useCart();
+
+  if (snackbar?.kind !== "receipt-submitted") return null;
+
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="absolute inset-x-4 bottom-4 z-10 flex items-center gap-3 rounded-lg bg-white px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.35)] max-md:inset-x-4"
+    >
+      <span className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-black">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M2.5 6L5 8.5L9.5 3.5"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+      <p className="min-w-0 flex-1 font-inter text-[13px] font-medium leading-snug text-black">
+        Receipt submitted! We&apos;ll confirm your order once verified.
+      </p>
+      <button
+        type="button"
+        onClick={dismissSnackbar}
+        aria-label="Dismiss notification"
+        className="shrink-0 font-inter text-[18px] leading-none text-black/50 transition hover:text-black"
+      >
+        ×
+      </button>
+    </div>
+  );
+}
+
 function EmptyCartBody() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 pb-14 pt-6 text-center max-md:px-5">
-      <div className="flex h-[80px] w-[80px] items-center justify-center rounded-[14px] border border-[#3D4659]">
-        <CartIconGold className="h-9 w-9" />
-      </div>
+      <CartIconGold className="h-10 w-10" />
       <p className="mt-6 font-heading text-[22px] leading-tight text-[#F2F0EA]">
         Your cup is empty.
       </p>
@@ -286,6 +328,34 @@ function CartWithItemsBody() {
 
     clearCart();
     showReceiptSubmittedSnackbar();
+  };
+
+  const handlePlaceRestaurantOrder = () => {
+    const trimmedName = fullName.trim();
+    const trimmedPhone = phone.trim();
+    let valid = true;
+
+    if (!trimmedName) {
+      setNameError(true);
+      valid = false;
+    }
+
+    if (!trimmedPhone) {
+      setPhoneError(true);
+      valid = false;
+    }
+
+    if (!valid) {
+      if (!trimmedName) nameInputRef.current?.focus();
+      return;
+    }
+
+    setFullName("");
+    setPhone("");
+    setNameError(false);
+    setPhoneError(false);
+    setPaymentMethod("bank");
+    clearCart();
   };
 
   const hasReceipt = Boolean(receiptPreviewUrl && receiptFile);
@@ -448,17 +518,6 @@ function CartWithItemsBody() {
               }}
             />
 
-            {hasReceipt ? (
-              <div className="mt-3 overflow-hidden rounded-[8px] border border-[#344056] bg-[#151C28]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={receiptPreviewUrl!}
-                  alt="Receipt preview"
-                  className="max-h-[160px] w-full object-contain"
-                />
-              </div>
-            ) : null}
-
             <button
               type="button"
               onClick={openReceiptPicker}
@@ -471,6 +530,17 @@ function CartWithItemsBody() {
               <UploadIcon />
               {hasReceipt ? "Change receipt" : "Upload receipt screenshot"}
             </button>
+
+            {hasReceipt ? (
+              <div className="mt-3 overflow-hidden rounded-[8px] border border-[#344056] bg-[#151C28]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={receiptPreviewUrl!}
+                  alt="Receipt preview"
+                  className="max-h-[160px] w-full object-contain"
+                />
+              </div>
+            ) : null}
 
             {receiptError && !hasReceipt ? (
               <p className="mt-1.5 font-inter text-[11px] text-[#B85C5C]">
@@ -486,6 +556,22 @@ function CartWithItemsBody() {
               Submit receipt for approval
             </button>
           </div>
+        )}
+
+        {paymentMethod === "restaurant" && (
+          <>
+            <p className="mt-4 px-1 text-center font-inter text-[12px] leading-relaxed text-[#8995A9]">
+              Ordering from the café? Skip the receipt — pay cash or card at the
+              counter and staff will confirm your order.
+            </p>
+            <button
+              type="button"
+              onClick={handlePlaceRestaurantOrder}
+              className="mt-4 h-[44px] w-full rounded-[10px] bg-[var(--gold)] font-inter text-[13px] font-medium text-[#1D2636] transition hover:opacity-90"
+            >
+              Place order · pay {totalValue} ETB at counter
+            </button>
+          </>
         )}
 
         <div className="mt-5 flex items-center gap-3">
@@ -508,8 +594,9 @@ function CartWithItemsBody() {
 }
 
 export default function CartDrawer() {
-  const { drawerOpen, closeDrawer, items } = useCart();
+  const { drawerOpen, closeDrawer, items, snackbar } = useCart();
   const hasItems = items.length > 0;
+  const receiptSnackbarOpen = snackbar?.kind === "receipt-submitted";
 
   if (!drawerOpen) return null;
 
@@ -529,7 +616,12 @@ export default function CartDrawer() {
         className="absolute right-0 top-0 flex h-full w-full max-w-[480px] flex-col bg-[#1A2230] shadow-[-8px_0_40px_rgba(0,0,0,0.45)] animate-[slideInRight_0.3s_ease-out] max-md:max-w-none"
       >
         <DrawerHeader onClose={closeDrawer} />
-        {hasItems ? <CartWithItemsBody /> : <EmptyCartBody />}
+        <div
+          className={`relative flex min-h-0 flex-1 flex-col ${receiptSnackbarOpen ? "pb-24" : ""}`}
+        >
+          {hasItems ? <CartWithItemsBody /> : <EmptyCartBody />}
+          <DrawerReceiptSnackbar />
+        </div>
       </aside>
     </div>
   );
