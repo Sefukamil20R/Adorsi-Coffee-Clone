@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
+import { useCart } from "@/components/cart/CartContext";
 
 type ProductCardProps = {
+  cartId: string;
   image: string;
   name: string;
   price: string;
+  priceValue: number;
   description: string;
 };
 
@@ -34,11 +39,24 @@ function CartIcon() {
 }
 
 export default function ProductCard({
+  cartId,
   image,
   name,
   price,
+  priceValue,
   description,
 }: ProductCardProps) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: cartId,
+      title: name,
+      price,
+      priceValue,
+    });
+  };
+
   return (
     <article className="w-full overflow-hidden rounded-[16px] border border-[#34445D] bg-[#28354A]">
       {/* Product image */}
@@ -55,6 +73,7 @@ export default function ProductCard({
         {/* Add to cart */}
         <button
           type="button"
+          onClick={handleAddToCart}
           className="absolute bottom-[20px] right-[22px] flex h-[50px] items-center gap-[9px] rounded-full bg-[#C7A15F] px-[22px] font-inter text-[15px] font-medium text-[#1D2636] transition-opacity hover:opacity-90"
         >
           <CartIcon />

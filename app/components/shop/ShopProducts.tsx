@@ -1,5 +1,6 @@
 import ProductCard from "@/components/shop/ProductCard";
 import Container from "../common/Container";
+import { SHOP_PRODUCTS } from "@/domain/shop/shop-products";
 
 export default function ShopProducts() {
   return (
@@ -29,19 +30,17 @@ export default function ShopProducts() {
 
         {/* Products */}
         <div className="mt-[70px] grid w-full max-w-[820px] gap-[42px] md:grid-cols-2 max-md:mt-[48px] max-md:gap-6">
-          <ProductCard
-            image="/shop/adorsiblue.png"
-            name="Adorsi Coffee"
-            price="46000 ETB"
-            description="Premium Ethiopian Coffee : 1kg"
-          />
-
-          <ProductCard
-            image="/shop/adorsiwhite.png"
-            name="Adorsi coffee"
-            price="23000 ETB"
-            description="Premium Ethiopian Coffee : 500g"
-          />
+          {SHOP_PRODUCTS.map((product) => (
+            <ProductCard
+              key={product.id}
+              cartId={product.id}
+              image={product.image}
+              name={product.name}
+              price={product.priceLabel}
+              priceValue={product.priceValue}
+              description={product.description}
+            />
+          ))}
         </div>
       </Container>
     </section>

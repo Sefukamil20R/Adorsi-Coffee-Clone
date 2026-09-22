@@ -10,6 +10,7 @@ import {
 } from "./chapa-payment-datasource";
 import { getAppBaseUrl } from "./app-url";
 import { findMenuItemsByIds } from "@/data/menu/menu-datasource";
+import { mergeShopPricesIntoMap } from "@/domain/shop/shop-products";
 import { computeCartTotalFromPrices } from "@/domain/payment/cart-total";
 import {
   createTxRef,
@@ -66,6 +67,7 @@ export class PaymentRepository {
     const ids = [...new Set(input.lines.map((line) => line.id))];
     const menuItems = await findMenuItemsByIds(ids);
     const priceById = new Map(menuItems.map((item) => [item.id, item.price]));
+    mergeShopPricesIntoMap(ids, priceById);
     const amount = computeCartTotalFromPrices(input.lines, priceById);
 
     if (process.env.NODE_ENV === "development") {
