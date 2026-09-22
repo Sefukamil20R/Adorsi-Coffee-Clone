@@ -25,14 +25,14 @@ export default function Signature() {
       <Container>
         <div className="grid items-start gap-14 lg:grid-cols-[0.82fr_1.18fr]">
          {/* Left Image */}
-<div className="relative mt-8 flex justify-start">
-  <div className="rounded-[30px] border border-[var(--gold)]/30 p-[1px]">
+<div className="relative mt-8 flex justify-start max-lg:justify-center">
+  <div className="rounded-[30px] border border-[var(--gold)]/30 p-[1px] max-lg:w-full max-lg:max-w-[455px]">
     <Image
       src="/signature/signature.webp"
       alt="Adorsi Signature Interior"
       width={565}
       height={680}
-      className="h-[540px] w-[455px] rounded-[29px] object-cover"
+      className="h-[540px] w-[455px] rounded-[29px] object-cover max-lg:h-auto max-lg:w-full max-md:object-contain"
     />
   </div>
 </div>
@@ -48,14 +48,14 @@ export default function Signature() {
             </div>
 
             {/* Title */}
-            <h2 className="font-heading text-[60px] leading-[1.08] text-white">
+            <h2 className="font-heading text-[60px] leading-[1.08] text-white max-lg:text-[48px] max-md:text-[40px]">
               Three pours.
               <br />
               <span className="text-[var(--gold)]">Three rituals.</span>
             </h2>
 
             {/* Description */}
-            <p className="mt-7 max-w-[520px] text-[16px] leading-8 text-[#C7CFD8]">
+            <p className="mt-7 w-full max-w-[520px] text-[16px] leading-8 text-[#C7CFD8] max-md:max-w-full max-md:text-[15px] max-md:leading-7">
               From single-origin filter to cloud-light signature lattes three
               drinks that define the Adorsi bar. Order them solo, or as a
               flight.
@@ -72,7 +72,7 @@ export default function Signature() {
                       : ""
                   }`}
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between max-md:gap-3">
                     <div>
                       <h3 className="font-heading text-[24px] text-white transition-colors duration-300 group-hover:text-[var(--gold)]">
                         {drink.name}

@@ -16,7 +16,7 @@ export default function About() {
               alt="Adorsi Coffee Interior"
               width={720}
               height={520}
-              className="h-[430px] w-full rounded-[28px] object-cover object-left shadow-2xl"
+              className="h-[430px] w-full rounded-[28px] object-cover object-left shadow-2xl max-md:h-auto max-md:object-contain max-md:object-center"
             />
 
             {/* Best in the City Card */}
@@ -40,7 +40,7 @@ export default function About() {
             </div>
 
             {/* Title */}
-            <h2 className="font-heading text-[46px] leading-[1.18] text-white">
+            <h2 className="font-heading text-[46px] leading-[1.18] text-white max-md:text-[38px] max-md:leading-[1.12]">
               Coffee is not a drink.
               <br />
               <span className="text-[var(--gold)]">
@@ -49,7 +49,7 @@ export default function About() {
             </h2>
 
             {/* Description */}
-            <div className="mt-8 space-y-7 text-[16px] leading-8 text-[#C7CFD8]">
+            <div className="mt-8 space-y-7 text-[16px] leading-8 text-[#C7CFD8] max-md:w-full max-md:max-w-full max-md:text-[15px] max-md:leading-7">
               <p>
                 ADORSI Coffee epitomizes luxury coffee in Ethiopia, setting new
                 standards with its premium quality, exclusive experience, and

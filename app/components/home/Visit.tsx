@@ -68,11 +68,11 @@ export default function Visit() {
             <span className="h-px w-[42px] bg-[#B89A67]" />
           </div>
 
-          <h2 className="mt-[32px] font-cormorant text-[46px] leading-none text-[#F2F0EA] sm:text-[50px]">
+          <h2 className="mt-[32px] font-cormorant text-[46px] leading-none text-[#F2F0EA] sm:text-[50px] max-md:text-[38px]">
             Come pour with us.
           </h2>
 
-          <p className="mt-[27px] font-inter text-[14px] leading-[1.5] text-[#C7CFD8]">
+          <p className="mt-[27px] w-full font-inter text-[14px] leading-[1.5] text-[#C7CFD8] max-md:text-[13px] max-md:leading-[1.45]">
             We&apos;re open every day. Stay for a quiet morning, or grab and go.
           </p>
         </div>
@@ -83,7 +83,7 @@ export default function Visit() {
           {visitItems.map((item) => (
             <div
               key={item.label}
-              className="min-h-[250px] border-b border-[#344056] px-[40px] py-[36px] md:border-b-0 md:border-r"
+              className="min-h-[250px] border-b border-[#344056] px-[40px] py-[36px] md:border-b-0 md:border-r max-md:px-6 max-md:py-7"
             >
               <GoldIcon src={item.icon} size={23} />
 
@@ -98,7 +98,7 @@ export default function Visit() {
           ))}
 
           {/* Reach us */}
-          <div className="min-h-[250px] px-[40px] py-[36px]">
+          <div className="min-h-[250px] px-[40px] py-[36px] max-md:px-6 max-md:py-7">
             <GoldIcon src="/visit/call.svg" size={23} />
 
             <p className="mt-[22px] font-inter text-[9px] font-medium uppercase tracking-[0.28em] text-[#929CAC]">

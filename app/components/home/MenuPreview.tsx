@@ -32,7 +32,7 @@ export default function MenuPreview() {
               </p>
             </div>
 
-<h2 className="font-heading text-[52px] leading-[1.12] text-white">              Built for ritual.
+<h2 className="font-heading text-[52px] leading-[1.12] text-white max-md:text-[40px] max-md:leading-[1.1]">              Built for ritual.
               <br />
               <span className="text-[var(--gold)]">
                 Ordered with ease.
@@ -41,7 +41,7 @@ export default function MenuPreview() {
           </div>
 
           <div className="flex items-center justify-end">
-            <p className="max-w-[360px] text-[15px] leading-7 text-[#C7CFD8]">
+            <p className="w-full max-w-[360px] text-[15px] leading-7 text-[#C7CFD8] max-md:max-w-full max-md:text-[14px] max-md:leading-6">
               Tap to add. Review your selections in the cart and place your order
               we&apos;ll have it ready when you arrive.{" "}
               <span className="text-[var(--gold)]">
@@ -56,7 +56,7 @@ export default function MenuPreview() {
           {categories.map((item, index) => (
             <button
               key={item}
-              className={`rounded-full px-5 py-3 text-[15px] transition ${
+              className={`rounded-full px-5 py-3 text-[15px] transition max-md:px-3 max-md:py-2 max-md:text-[13px] ${
                 index === 0
                   ? "bg-[var(--gold)] text-[var(--blue-black)]"
                   : "text-white/65 hover:text-white"

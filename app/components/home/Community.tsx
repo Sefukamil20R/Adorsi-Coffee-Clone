@@ -15,11 +15,11 @@ export default function Community() {
             </span>
           </div>
 
-          <h2 className="font-cormorant text-[40px] leading-none text-[#F2F0EA] sm:text-[42px]">
+          <h2 className="font-cormorant text-[40px] leading-none text-[#F2F0EA] sm:text-[42px] max-md:text-[34px]">
             Events & updates
           </h2>
 
-          <p className="mt-6 max-w-[570px] font-inter text-[15px] leading-[1.65] text-[#C7CFD8]">
+          <p className="mt-6 w-full max-w-[570px] font-inter text-[15px] leading-[1.65] text-[#C7CFD8] max-md:max-w-full max-md:leading-[1.55]">
             Join us for tastings and workshops, and follow news from the Adorsi
             coffee community.
           </p>
@@ -27,8 +27,8 @@ export default function Community() {
 
         {/* Upcoming events */}
         <div className="mt-[58px]">
-          <div className="mb-7 flex items-center justify-between">
-            <h3 className="font-cormorant text-[25px] leading-none text-[#F2F0EA]">
+          <div className="mb-7 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-3">
+            <h3 className="font-cormorant text-[25px] leading-none text-[#F2F0EA] max-md:text-[22px]">
               Upcoming events
             </h3>
 
@@ -49,7 +49,7 @@ export default function Community() {
               <p className="mx-auto mt-2 max-w-[410px] font-inter text-[12px] leading-[1.45] text-[#8F99A9]">
                 We&apos;re planning tastings, workshops, and community
                 gatherings.
-                <br />
+                <br className="max-md:hidden" />
                 Check back soon.
               </p>
 
@@ -65,8 +65,8 @@ export default function Community() {
 
         {/* Latest news */}
         <div className="mt-[84px]">
-          <div className="mb-7 flex items-center justify-between">
-            <h3 className="font-cormorant text-[25px] leading-none text-[#F2F0EA]">
+          <div className="mb-7 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-3">
+            <h3 className="font-cormorant text-[25px] leading-none text-[#F2F0EA] max-md:text-[22px]">
               Latest news
             </h3>
 
