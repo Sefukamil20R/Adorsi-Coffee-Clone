@@ -30,8 +30,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" style={{ colorScheme: "only dark" }}>
-      <body className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <body
+        suppressHydrationWarning
+        className={`${inter.variable} ${cormorant.variable}`}
+      >
         <CartProviders>{children}</CartProviders>
       </body>
     </html>

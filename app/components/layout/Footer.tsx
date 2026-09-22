@@ -49,6 +49,7 @@ export default function Footer() {
               width={86}
               height={25}
               className="h-auto w-[86px] object-contain"
+              style={{ height: "auto" }}
             />
 
             <p className="mt-[24px] max-w-[430px] font-inter text-[14px] leading-[1.55] text-[#9DA7B7]">

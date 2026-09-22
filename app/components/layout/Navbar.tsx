@@ -88,7 +88,8 @@ export default function Navbar() {
             alt="Adorsi"
             width={118}
             height={38}
-            className="h-auto max-lg:w-[95px]"
+            className="h-auto w-[118px] max-lg:w-[95px]"
+            style={{ height: "auto" }}
             priority
           />
         </Link>
