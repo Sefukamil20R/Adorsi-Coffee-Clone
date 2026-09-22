@@ -55,9 +55,9 @@ export default function MenuPage() {
 
       <main className="bg-[#1D2636]">
         <section>
-          <Container className="pb-[100px] pt-[145px]">
+          <Container className="pb-[100px] pt-[145px] max-lg:pt-[190px] max-md:pb-[64px] max-md:pt-[190px]">
             {/* MENU INTRO */}
-           <div className="mt-[35px] grid items-end gap-10 lg:grid-cols-[1fr_390px]">
+           <div className="mt-[35px] grid items-end gap-10 lg:grid-cols-[1fr_390px] max-md:mt-6 max-md:gap-6">
               {/* Left */}
               <div>
                 <div className="flex items-center gap-[15px]">
@@ -68,7 +68,7 @@ export default function MenuPage() {
                   </span>
                 </div>
 
-                <h1 className="mt-[35px] max-w-[470px] font-cormorant text-[60px] leading-[0.92] tracking-[-0.02em] text-[#F2F0EA] sm:text-[64px]">
+                <h1 className="mt-[35px] max-w-[470px] font-cormorant text-[60px] leading-[0.92] tracking-[-0.02em] text-[#F2F0EA] sm:text-[64px] max-md:max-w-full max-md:text-[43px] max-md:leading-[1.02]">
                   Every cup,
                   <br />
                   <span className="text-[#C7A15F]">fully explored.</span>
@@ -76,7 +76,7 @@ export default function MenuPage() {
               </div>
 
               {/* Right */}
-              <p className="max-w-[390px] pb-[4px] font-inter text-[16px] leading-[1.55] text-[#C7CFD8]">
+              <p className="w-full max-w-[390px] pb-[4px] font-inter text-[16px] leading-[1.55] text-[#C7CFD8] max-md:max-w-full max-md:text-[15px]">
                 Search, filter, and sort our full catalog. All prices in
                 <br className="hidden sm:block" />
                 ETB add items straight to your order.
@@ -84,9 +84,9 @@ export default function MenuPage() {
             </div>
 
             {/* SEARCH + FILTERS */}
-            <div className="mt-[68px] flex flex-col gap-3 xl:flex-row">
+            <div className="mt-[68px] flex flex-col gap-3 xl:flex-row max-md:mt-10 max-md:gap-2">
               {/* Search */}
-              <div className="flex h-[53px] min-w-0 flex-1 items-center rounded-full border border-[#435068] bg-[#283347] px-[19px]">
+              <div className="flex h-[53px] min-w-0 flex-1 items-center rounded-full border border-[#435068] bg-[#283347] px-[19px] max-xl:flex-none max-md:h-[44px] max-md:px-[16px]">
                 <svg
                   width="18"
                   height="18"
@@ -111,7 +111,7 @@ export default function MenuPage() {
                   />
                 </svg>
 
-                <span className="font-inter text-[15px] text-[#8995A9]">
+                <span className="truncate font-inter text-[15px] text-[#8995A9]">
                   Search drinks, food, categories...
                 </span>
               </div>
@@ -119,7 +119,7 @@ export default function MenuPage() {
               {/* Category */}
               <button
                 type="button"
-                className="flex h-[53px] min-w-[195px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[22px] font-inter text-[15px] text-[#F2F0EA]"
+                className="flex h-[53px] min-w-[195px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[22px] font-inter text-[15px] text-[#F2F0EA] max-md:h-[44px] max-md:w-full max-md:min-w-0 max-md:px-[18px]"
               >
                 <span>All categories</span>
 
@@ -145,7 +145,7 @@ export default function MenuPage() {
               {/* Tags */}
               <button
                 type="button"
-                className="flex h-[53px] min-w-[160px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[22px] font-inter text-[15px] text-[#F2F0EA]"
+                className="flex h-[53px] min-w-[160px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[22px] font-inter text-[15px] text-[#F2F0EA] max-md:h-[44px] max-md:w-full max-md:min-w-0 max-md:px-[18px]"
               >
                 <span>All tags</span>
 
@@ -171,7 +171,7 @@ export default function MenuPage() {
               {/* Price */}
               <button
                 type="button"
-                className="flex h-[53px] min-w-[170px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[22px] font-inter text-[15px] text-[#F2F0EA]"
+                className="flex h-[53px] min-w-[170px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[22px] font-inter text-[15px] text-[#F2F0EA] max-md:h-[44px] max-md:w-full max-md:min-w-0 max-md:px-[18px]"
               >
                 <span>All prices</span>
 
@@ -197,10 +197,10 @@ export default function MenuPage() {
               {/* Sort */}
               <button
                 type="button"
-                className="flex h-[53px] min-w-[195px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[20px] font-inter text-[15px] text-[#F2F0EA]"
+                className="flex h-[53px] min-w-[195px] items-center justify-between rounded-full border border-[#435068] bg-[#283347] px-[20px] font-inter text-[15px] text-[#F2F0EA] max-md:h-[44px] max-md:w-full max-md:min-w-0 max-md:px-[18px]"
               >
-                <span className="flex items-center gap-[12px]">
-                  <span className="text-[19px] text-[#8995A9]">↕</span>
+                <span className="flex items-center gap-[12px] max-md:gap-[10px]">
+                  <span className="text-[19px] text-[#8995A9] max-md:text-[17px]">↕</span>
                   <span>Sort: Category</span>
                 </span>
 
@@ -225,7 +225,7 @@ export default function MenuPage() {
             </div>
 
             {/* ITEM COUNT */}
-            <p className="mt-[45px] font-inter text-[15px] text-[#8995A9]">
+            <p className="mt-[45px] font-inter text-[15px] text-[#8995A9] max-md:mt-8">
               126 items
             </p>
 
@@ -242,6 +242,7 @@ export default function MenuPage() {
     lg:grid-cols-3
 
     [&>div]:!border-r-0
+    max-md:mt-7
   "
 >
   {menuItems.map((item, index) => (

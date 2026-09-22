@@ -107,11 +107,11 @@ export default function Navbar() {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-5 max-lg:gap-[13px]">
+        <div className="flex items-center gap-5 max-lg:relative max-lg:z-10 max-lg:gap-[13px]">
           {/* Cart */}
           <button
             type="button"
-            className="cursor-pointer"
+            className="cursor-pointer max-lg:flex max-lg:items-center max-lg:justify-center"
             aria-label="Cart"
           >
             <Image

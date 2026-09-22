@@ -9,7 +9,7 @@ export default function EventsPage() {
 
       <main className="bg-[#1D2636]">
         <section>
-          <Container className="pb-[190px] pt-[190px]">
+          <Container className="pb-[190px] pt-[190px] max-lg:pt-[190px] max-md:pb-[96px] max-md:pt-[190px]">
             {/* HEADER */}
             <div>
               <div className="flex items-center gap-[13px]">
@@ -20,11 +20,11 @@ export default function EventsPage() {
                 </span>
               </div>
 
-              <h1 className="mt-[34px] font-cormorant text-[46px] leading-[0.95] text-[#F2F0EA]">
+              <h1 className="mt-[34px] font-cormorant text-[46px] leading-[0.95] text-[#F2F0EA] max-md:text-[38px] max-md:leading-[1.02]">
                 Upcoming Events
               </h1>
 
-              <p className="mt-[28px] max-w-[700px] font-inter text-[16px] leading-[1.55] text-[#C7CFD8]">
+              <p className="mt-[28px] w-full max-w-[700px] font-inter text-[16px] leading-[1.55] text-[#C7CFD8] max-md:max-w-full max-md:text-[15px]">
                 Adorsi-hosted tastings, workshops, and gatherings. Pay online
                 with Chapa —
                 <br className="hidden sm:block" />
@@ -33,8 +33,8 @@ export default function EventsPage() {
             </div>
 
             {/* UPCOMING EVENTS */}
-            <div className="mt-[60px] flex h-[168px] items-center justify-center rounded-[17px] border border-[#344056]">
-              <p className="font-inter text-[15px] text-[#8F9BAD]">
+            <div className="mt-[60px] flex h-[168px] items-center justify-center rounded-[17px] border border-[#344056] px-6 text-center max-md:mt-10 max-md:h-auto max-md:min-h-[150px]">
+              <p className="font-inter text-[15px] text-[#8F9BAD] max-md:text-[14px]">
                 No upcoming events right now. Follow our news page for
                 announcements.
               </p>
@@ -42,12 +42,12 @@ export default function EventsPage() {
 
             {/* PAST EVENTS */}
             <div className="mt-[88px]">
-              <h2 className="font-cormorant text-[25px] leading-none text-[#F2F0EA]">
+              <h2 className="font-cormorant text-[25px] leading-none text-[#F2F0EA] max-md:text-[23px]">
                 Past events
               </h2>
 
-              <div className="mt-[38px] w-full max-w-[444px] rounded-[17px] border border-[#344056] px-[38px] py-[37px]">
-                <div className="flex items-center gap-[13px]">
+              <div className="mt-[38px] w-full max-w-[444px] rounded-[17px] border border-[#344056] px-[38px] py-[37px] max-md:mt-6 max-md:max-w-full max-md:px-6 max-md:py-7">
+                <div className="flex items-center gap-[13px] max-md:flex-wrap max-md:gap-x-3 max-md:gap-y-2">
                   <span className="font-inter text-[10px] font-medium uppercase tracking-[0.25em] text-[#B89A67]">
                     Free
                   </span>

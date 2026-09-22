@@ -42,13 +42,13 @@ export default function ProductCard({
   return (
     <article className="w-full overflow-hidden rounded-[16px] border border-[#34445D] bg-[#28354A]">
       {/* Product image */}
-      <div className="relative h-[440px] w-full overflow-hidden bg-[#071C3C]">
+      <div className="relative h-[440px] w-full overflow-hidden bg-[#071C3C] max-md:h-auto max-md:aspect-[4/3]">
         <Image
           src={image}
           alt={name}
           fill
           priority
-          className="object-cover"
+          className="object-cover max-md:object-contain"
           sizes="(max-width: 768px) 100vw, 430px"
         />
 
@@ -63,13 +63,13 @@ export default function ProductCard({
       </div>
 
       {/* Product information */}
-      <div className="px-[30px] pb-[35px] pt-[27px]">
-        <div className="flex items-baseline justify-between gap-4">
-          <h3 className="font-cormorant text-[27px] leading-none text-[#F2F0EA]">
+      <div className="px-[30px] pb-[35px] pt-[27px] max-md:px-5 max-md:pb-7 max-md:pt-6">
+        <div className="flex items-baseline justify-between gap-4 max-md:items-start">
+          <h3 className="font-cormorant text-[27px] leading-none text-[#F2F0EA] max-md:text-[24px]">
             {name}
           </h3>
 
-          <span className="shrink-0 font-cormorant text-[20px] leading-none text-[#C7A15F]">
+          <span className="shrink-0 font-cormorant text-[20px] leading-none text-[#C7A15F] max-md:text-[18px]">
             {price}
           </span>
         </div>
