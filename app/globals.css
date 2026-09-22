@@ -13,7 +13,6 @@
   --font-heading: "Cormorant Garamond", serif;
 }
 
-/* Lock palette to sRGB on wide-gamut phone displays (prevents gold/navy hue shift). */
 @supports (color: color(srgb 0 0 0)) {
   :root {
     --blue-black: color(srgb 0.113725 0.14902 0.211765);
@@ -46,7 +45,6 @@ button {
   color-scheme: dark;
 }
 
-/* Masked SVG icons (Visit) — stable gold, fewer fringe artifacts on mobile WebKit. */
 .gold-icon-mask {
   background-color: #b89a67;
   transform: translateZ(0);

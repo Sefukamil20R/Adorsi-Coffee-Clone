@@ -81,7 +81,6 @@ export default function Navbar() {
       }`}
     >
       <Container className="flex h-20 items-center justify-between max-lg:h-[72px]">
-        {/* Logo */}
         <Link href="/" onClick={() => setMenuOpen(false)}>
           <Image
             src="/logo/logo.png"
@@ -94,7 +93,6 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop Links */}
         <div className="hidden items-center gap-9 lg:flex">
           {links.map((item) => (
             <Link
@@ -112,9 +110,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right Side */}
         <div className="flex items-center gap-5 max-lg:relative max-lg:z-10 max-lg:gap-[13px]">
-          {/* Cart */}
           <button
             type="button"
             onClick={openDrawer}
@@ -135,7 +131,6 @@ export default function Navbar() {
             ) : null}
           </button>
 
-          {/* Desktop Order Button */}
           <Link
             href="/menu"
             className="rounded-full bg-[var(--gold)] px-6 py-3 text-sm font-medium text-black transition hover:opacity-90 max-lg:hidden"
@@ -143,7 +138,6 @@ export default function Navbar() {
             Order Now
           </Link>
 
-          {/* Mobile Hamburger */}
           <button
             type="button"
             aria-label="Toggle menu"
@@ -160,7 +154,6 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* Mobile Menu */}
       <div
         className={`overflow-hidden border-t border-[#344056] transition-all duration-300 lg:hidden ${
           menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"

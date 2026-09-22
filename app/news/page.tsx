@@ -11,7 +11,6 @@ export default function NewsPage() {
       <main className="bg-[#1D2636]">
         <section>
           <Container className="pb-[185px] pt-[170px] max-lg:pt-[190px] max-md:pb-[96px] max-md:pt-[190px]">
-            {/* HEADER */}
             <div>
               <div className="flex items-center gap-[14px]">
                 <span className="h-px w-[43px] bg-[#B89A67]" />
@@ -33,7 +32,6 @@ export default function NewsPage() {
               </p>
             </div>
 
-            {/* NEWS CARD */}
             <div className="mt-[68px] max-md:mt-10">
               <article className="w-full max-w-[441px] rounded-[17px] border border-[#344056] px-[38px] py-[38px] max-md:max-w-full max-md:px-6 max-md:py-7">
                 <div className="flex items-center gap-[14px]">

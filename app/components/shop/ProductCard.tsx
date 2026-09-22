@@ -59,7 +59,6 @@ export default function ProductCard({
 
   return (
     <article className="w-full overflow-hidden rounded-[16px] border border-[#34445D] bg-[#28354A]">
-      {/* Product image */}
       <div className="relative h-[440px] w-full overflow-hidden bg-[#071C3C] max-md:h-auto max-md:aspect-[4/3]">
         <Image
           src={image}
@@ -70,7 +69,6 @@ export default function ProductCard({
           sizes="(max-width: 768px) 100vw, 430px"
         />
 
-        {/* Add to cart */}
         <button
           type="button"
           onClick={handleAddToCart}
@@ -81,7 +79,6 @@ export default function ProductCard({
         </button>
       </div>
 
-      {/* Product information */}
       <div className="px-[30px] pb-[35px] pt-[27px] max-md:px-5 max-md:pb-7 max-md:pt-6">
         <div className="flex items-baseline justify-between gap-4 max-md:items-start">
           <h3 className="font-cormorant text-[27px] leading-none text-[#F2F0EA] max-md:text-[24px]">

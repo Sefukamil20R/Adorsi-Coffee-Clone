@@ -370,10 +370,6 @@ function CartWithItemsBody() {
   };
 
   const handlePayOnlineChapa = async () => {
-    if (process.env.NODE_ENV === "development") {
-      console.log("[CHAPA] Pay Online clicked");
-    }
-
     if (chapaLoading) return;
 
     setChapaError(null);
@@ -403,32 +399,16 @@ function CartWithItemsBody() {
         "Use a valid Ethiopian number (09xxxxxxxx or 07xxxxxxxx).";
     }
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("[CHAPA] Validation:", valid ? "passed" : "failed", {
-        name: trimmedName,
-        phone: trimmedPhone,
-        items,
-        totalValue,
-      });
-    }
-
     if (!valid) {
       setChapaValidationMessage(validationMessage);
       showChapaFeedback();
       if (!isValidCustomerName(trimmedName)) nameInputRef.current?.focus();
-      else if (!trimmedPhone || !isValidEthiopianPhone(trimmedPhone)) {
-        // phone field is second in grid — focus via query from container
-      }
       return;
     }
 
     setChapaLoading(true);
 
     try {
-      if (process.env.NODE_ENV === "development") {
-        console.log("[CHAPA] Calling /api/payment/chapa/initialize");
-      }
-
       const result = await initializeChapaCheckout({
         fullName: trimmedName,
         phone: trimmedPhone,

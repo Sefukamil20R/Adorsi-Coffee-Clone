@@ -1,8 +1,3 @@
-/**
- * Base URL for Chapa return/callback links.
- * On Vercel, VERCEL_PROJECT_PRODUCTION_URL / VERCEL_URL are set automatically —
- * you do not need APP_URL for production to match local behavior.
- */
 export function getAppBaseUrl(): string {
   const candidates = [
     process.env.APP_URL,

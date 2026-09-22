@@ -5,7 +5,6 @@ import Container from "../common/Container";
 export default function Hero() {
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background Video */}
       <video
         autoPlay
         muted
@@ -16,7 +15,6 @@ export default function Hero() {
         <source src="/hero/hero-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Left Gradient */}
       <div
         className="absolute inset-0"
         style={{
@@ -25,7 +23,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Hero Content */}
       <div className="relative z-10 flex h-full items-center">
         <Container>
           <div className="max-w-2xl pt-60 lg:pt-72 max-md:pt-40">

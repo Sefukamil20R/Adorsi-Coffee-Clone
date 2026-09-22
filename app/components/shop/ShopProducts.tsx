@@ -28,7 +28,6 @@ export default function ShopProducts() {
           </p>
         </div>
 
-        {/* Products */}
         <div className="mt-[70px] grid w-full max-w-[820px] gap-[42px] md:grid-cols-2 max-md:mt-[48px] max-md:gap-6">
           {SHOP_PRODUCTS.map((product) => (
             <ProductCard

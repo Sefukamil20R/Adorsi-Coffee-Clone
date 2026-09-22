@@ -50,7 +50,6 @@ export default function Visit() {
   return (
     <section id="visit" className="bg-[#1D2636]">
       <Container className="py-[86px]">
-        {/* Heading */}
         <div className="text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-[42px] bg-[#B89A67]" />
@@ -71,9 +70,7 @@ export default function Visit() {
           </p>
         </div>
 
-        {/* Visit card */}
         <div className="mt-[64px] grid w-full overflow-hidden border border-[#344056] bg-[#283347] md:grid-cols-3">
-          {/* Find us / Hours */}
           {visitItems.map((item) => (
             <div
               key={item.label}
@@ -91,7 +88,6 @@ export default function Visit() {
             </div>
           ))}
 
-          {/* Reach us */}
           <div className="min-h-[250px] px-[40px] py-[36px] max-md:px-6 max-md:py-7">
             <GoldIcon src="/visit/call.svg" size={23} />
 
@@ -105,7 +101,6 @@ export default function Visit() {
               @adorsicoffee
             </div>
 
-            {/* Social icons */}
             <div className="mt-[20px] flex items-center gap-3">
               <a
                 href="https://www.instagram.com/adorsicoffee?igsh=cTlkazQ0ZWVja2Rv"

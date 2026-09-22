@@ -9,7 +9,6 @@ export default function About() {
     >
       <Container>
         <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* Left Image */}
           <div className="relative overflow-visible">
             <Image
               src="/about/about.webp"
@@ -19,7 +18,6 @@ export default function About() {
               className="h-[430px] w-full rounded-[28px] object-cover object-left shadow-2xl max-md:h-auto max-md:object-contain max-md:object-center"
             />
 
-            {/* Best in the City Card */}
             <div className="absolute -bottom-5 right-0 scale-90 origin-bottom-right rounded-[18px] bg-[var(--gold)] px-7 py-6 shadow-xl">
   <p className="font-heading text-[20px] leading-tight text-[var(--blue-black)]">
     Best in
@@ -29,9 +27,7 @@ export default function About() {
 </div>
           </div>
 
-          {/* Right Content */}
           <div>
-            {/* Section Label */}
             <div className="mb-6 flex items-center gap-3">
               <div className="h-px w-10 bg-[var(--gold)]" />
               <p className="text-[11px] uppercase tracking-[0.35em] text-[var(--gold)]">
@@ -39,7 +35,6 @@ export default function About() {
               </p>
             </div>
 
-            {/* Title */}
             <h2 className="font-heading text-[46px] leading-[1.18] text-white max-md:text-[38px] max-md:leading-[1.12]">
               Coffee is not a drink.
               <br />
@@ -48,7 +43,6 @@ export default function About() {
               </span>
             </h2>
 
-            {/* Description */}
             <div className="mt-8 space-y-7 text-[16px] leading-8 text-[#C7CFD8] max-md:w-full max-md:max-w-full max-md:text-[15px] max-md:leading-7">
               <p>
                 ADORSI Coffee epitomizes luxury coffee in Ethiopia, setting new

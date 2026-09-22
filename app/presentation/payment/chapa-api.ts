@@ -29,11 +29,6 @@ function extractErrorMessage(data: unknown): string {
 export async function initializeChapaCheckout(
   body: InitializeChapaRequest,
 ): Promise<InitializeChapaResponse> {
-  if (process.env.NODE_ENV === "development") {
-    console.log("[CHAPA] Initializing payment...");
-    console.log("[CHAPA] Request payload:", body);
-  }
-
   let res: Response;
 
   try {
@@ -74,10 +69,6 @@ export async function initializeChapaCheckout(
     return {
       error: "Chapa did not return a checkout URL. Please try again.",
     };
-  }
-
-  if (process.env.NODE_ENV === "development") {
-    console.log("[CHAPA] checkout_url received, redirecting");
   }
 
   return {

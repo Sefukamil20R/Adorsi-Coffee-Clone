@@ -38,7 +38,6 @@ export default function MenuCard({
           : "border-r border-white/10"
       }`}
     >
-      {/* Title & Price */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <h3 className="font-heading text-[24px] leading-snug text-white">
           {title}
@@ -51,7 +50,6 @@ export default function MenuCard({
         </div>
       </div>
 
-      {/* Tags */}
       <div className="mb-4 flex flex-wrap gap-2">
         {tags.map((tag, index) => (
           <span
@@ -63,12 +61,10 @@ export default function MenuCard({
         ))}
       </div>
 
-      {/* Description */}
       <p className="mb-6 flex-1 text-[14px] leading-7 text-[#C7CFD8]">
         {description}
       </p>
 
-      {/* Button */}
       <button
         type="button"
         onClick={handleAddToOrder}

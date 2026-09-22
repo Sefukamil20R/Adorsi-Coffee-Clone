@@ -5,18 +5,15 @@ export default function Roaster() {
   return (
     <section className="bg-[#1D2636]">
       <Container className="pb-[105px] pt-[58px] max-md:pb-[72px] max-md:pt-[40px]">
-        {/* Divider */}
         <div className="h-px w-full bg-[#2B3547]" />
 
-        {/* Space after divider before the entire second section */}
-   <div className="relative mt-[170px] min-h-[640px] max-md:mt-[72px] max-md:min-h-0">          {/* LEFT TEXT */}
+        <div className="relative mt-[170px] min-h-[640px] max-md:mt-[72px] max-md:min-h-0">
           <div className="w-full lg:w-[650px]">
             <h2 className="font-cormorant text-[49px] leading-[1] text-[#F2F0EA] max-md:text-[38px] max-md:leading-[1.05]">
               The Adorsi Roaster
             </h2>
 
             <div className="mt-[32px] space-y-[27px]">
-              {/* Paragraph 1 */}
               <p className="font-inter text-[17px] leading-[1.55] text-[#C5CCD6]">
                 <span className="block whitespace-nowrap max-md:inline max-md:whitespace-normal">
                   Ethiopian coffee, reimagined sourced from the root, roasted with
@@ -32,7 +29,6 @@ export default function Roaster() {
                 </span>
               </p>
 
-              {/* Paragraph 2 */}
               <p className="font-inter text-[17px] leading-[1.55] text-[#C5CCD6]">
                 <span className="block whitespace-nowrap max-md:inline max-md:whitespace-normal">
                   At Adorsi, roasting is more than a process, it is a profound
@@ -48,7 +44,6 @@ export default function Roaster() {
                 </span>
               </p>
 
-              {/* Paragraph 3 */}
               <p className="font-inter text-[17px] leading-[1.55] text-[#C5CCD6]">
                 <span className="block whitespace-nowrap max-md:inline max-md:whitespace-normal">
                   Our roasting approach is defined by intention. We do not impose a
@@ -65,15 +60,12 @@ export default function Roaster() {
               </p>
             </div>
 
-            {/* Closing statement */}
             <p className="mt-[36px] whitespace-nowrap font-cormorant text-[21px] leading-[1.15] text-[#B89A67] max-md:whitespace-normal max-md:text-[19px]">
               Adorsi Coffee Ethiopian Roasting, Reimagined.
             </p>
           </div>
 
-          {/* RIGHT IMAGE GROUP */}
           <div className="mt-10 w-full lg:absolute lg:right-[-55px] lg:top-[-95px] lg:mt-0 lg:w-[600px] max-md:mt-8">
-            {/* Double Adorsi */}
             <div className="relative h-[430px] w-full overflow-hidden rounded-[20px] border border-[rgba(184,154,103,0.28)] shadow-[0_0_16px_rgba(184,154,103,0.08)] max-md:h-auto max-md:aspect-[1.46]">
               <Image
                 src="/shop/doubleadorsi.png"
@@ -84,7 +76,6 @@ export default function Roaster() {
               />
             </div>
 
-            {/* Bottom two images */}
             <div className="mt-[20px] grid grid-cols-2 gap-[20px]">
               <div className="relative aspect-square overflow-hidden rounded-[20px] border border-[rgba(184,154,103,0.28)] shadow-[0_0_16px_rgba(184,154,103,0.08)] max-md:aspect-[4/3]">
                 <Image

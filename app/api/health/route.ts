@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-/** Quick check that the deployed app can reach the database and menu is seeded. */
 export async function GET() {
   try {
     const menuCount = await prisma.menuItem.count();

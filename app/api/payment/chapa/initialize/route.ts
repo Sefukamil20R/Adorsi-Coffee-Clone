@@ -27,11 +27,6 @@ export async function POST(request: NextRequest) {
 
     const lines = parseLines(body.lines);
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("[CHAPA] Initialize request received");
-      console.log("[CHAPA] Cart lines:", lines);
-    }
-
     const result = await paymentRepository.initializeChapaCheckout({
       fullName: body.fullName ?? "",
       phone: body.phone ?? "",
@@ -39,18 +34,10 @@ export async function POST(request: NextRequest) {
     });
 
     if (!result.ok) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("[CHAPA] Initialize failed:", result.error);
-      }
       return NextResponse.json(
         { error: result.error },
         { status: result.status },
       );
-    }
-
-    if (process.env.NODE_ENV === "development") {
-      console.log("[CHAPA] tx_ref:", result.txRef);
-      console.log("[CHAPA] checkout_url received");
     }
 
     return NextResponse.json({

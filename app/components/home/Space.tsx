@@ -5,9 +5,7 @@ export default function Space() {
   return (
     <section id="space" className="bg-[var(--blue-black)] py-24">
       <Container>
-        {/* Header */}
         <div className="grid items-end gap-10 lg:grid-cols-[1.08fr_0.92fr]">
-          {/* Left */}
           <div className="max-w-[600px] pb-3">
             <div className="mb-6 flex items-center gap-3">
               <div className="h-px w-10 bg-[var(--gold)]" />
@@ -23,7 +21,6 @@ export default function Space() {
             </h2>
           </div>
 
-          {/* Right */}
           <div className="flex justify-end pb-5 max-lg:justify-start">
             <p className="w-full max-w-[510px] text-[17px] leading-8 text-[#C7CFD8] max-md:max-w-full max-md:text-[15px] max-md:leading-7">
               Marble veining. Warm light. Plants and quiet corners.
@@ -35,7 +32,6 @@ export default function Space() {
           </div>
         </div>
 
-        {/* Gallery */}
         <div className="mt-14 flex justify-center">
           <div className="grid w-full max-w-[1200px] grid-cols-2 gap-5 max-md:grid-cols-1">
             <div className="rounded-[28px] border border-[var(--gold)]/30 p-[1px] max-md:aspect-[3/2] max-md:overflow-hidden">

@@ -6,7 +6,6 @@ export default function Source() {
     <section id="source" className="bg-[#1D2636]">
       <Container className="flex min-h-screen items-center py-[100px]">
         <div className="flex w-full items-center justify-center gap-[45px] max-lg:flex-col max-lg:items-start max-lg:justify-start">
-          {/* Left content */}
           <div className="w-[570px] shrink-0 max-lg:w-full">
             <div className="mb-[34px] flex items-center gap-[16px]">
               <span className="h-px w-[48px] bg-[#B89A67]" />
@@ -20,7 +19,6 @@ export default function Source() {
               Every Cup Tells a Story.
             </h2>
 
-            {/* Description */}
             <p className="mt-[40px] w-[670px] max-w-none font-inter text-[18px] font-normal leading-[1.55] text-[#BABABB] max-lg:w-full max-lg:max-w-full max-md:w-full max-md:max-w-full max-md:text-[16px] max-md:leading-[1.55]">
               Ethiopian coffee, reimagined sourced from the root, roasted with
               <br className="max-md:hidden" />
@@ -43,7 +41,6 @@ export default function Source() {
             </a>
           </div>
 
-          {/* Right image */}
           <div className="relative h-[420px] w-[560px] shrink-0 overflow-hidden rounded-[26px] border border-[#B89A67]/30 max-lg:h-auto max-lg:aspect-[4/3] max-lg:w-full max-md:aspect-[1.46]">
             <Image
               src="/source/source.png"

@@ -40,7 +40,6 @@ export default function Footer() {
   return (
     <footer className="bg-[#1D2636]">
       <Container className="pb-[38px] pt-[96px]">
-        {/* Upper footer */}
         <div className="grid gap-8 md:grid-cols-[1.65fr_0.75fr_0.9fr]">
           <div>
             <Image
@@ -112,10 +111,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="mt-[62px] h-px w-full bg-[#2B3547]" />
 
-        {/* Bottom row */}
         <div className="grid grid-cols-[1.65fr_0.75fr_0.9fr] pt-[34px] max-md:flex max-md:flex-col max-md:gap-[18px]">
           <p className="font-inter text-[12px] text-[#748095]">
             © 2026 Adorsi Specialty Coffee

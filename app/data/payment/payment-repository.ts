@@ -70,10 +70,6 @@ export class PaymentRepository {
     mergeShopPricesIntoMap(ids, priceById);
     const amount = computeCartTotalFromPrices(input.lines, priceById);
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("[CHAPA] Calculated total:", amount);
-    }
-
     if (amount === null) {
       return {
         ok: false,

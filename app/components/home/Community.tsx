@@ -6,7 +6,6 @@ export default function Community() {
   return (
     <section className="bg-[#283347]">
       <Container className="py-[68px]">
-        {/* Section introduction */}
         <div>
           <div className="mb-7 flex items-center gap-3">
             <span className="h-px w-[34px] bg-[#B89A67]" />
@@ -26,7 +25,6 @@ export default function Community() {
           </p>
         </div>
 
-        {/* Upcoming events */}
         <div className="mt-[58px]">
           <div className="mb-7 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-3">
             <h3 className="font-cormorant text-[25px] leading-none text-[#F2F0EA] max-md:text-[22px]">
@@ -64,7 +62,6 @@ export default function Community() {
           </div>
         </div>
 
-        {/* Latest news */}
         <div className="mt-[84px]">
           <div className="mb-7 flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-3">
             <h3 className="font-cormorant text-[25px] leading-none text-[#F2F0EA] max-md:text-[22px]">

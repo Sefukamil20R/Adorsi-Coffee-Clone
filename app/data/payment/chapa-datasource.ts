@@ -40,10 +40,6 @@ function getChapaSecretKey(): string {
 export async function chapaInitializeTransaction(
   payload: ChapaInitializePayload,
 ): Promise<{ checkoutUrl: string }> {
-  if (process.env.NODE_ENV === "development") {
-    console.log("[CHAPA] Initialize payload email:", payload.email);
-  }
-
   const response = await fetch(`${CHAPA_API_BASE}/transaction/initialize`, {
     method: "POST",
     headers: {
@@ -58,9 +54,6 @@ export async function chapaInitializeTransaction(
   }>;
 
   if (!response.ok || body.status !== "success" || !body.data?.checkout_url) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("[CHAPA] Initialize API response:", body);
-    }
     const message = formatApiErrorMessage(
       body.message,
       "Chapa failed to initialize the transaction",
