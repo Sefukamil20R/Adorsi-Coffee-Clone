@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Adorsi Coffee
 
-## Getting Started
+Single Next.js application: storefront, menu API, cart, manual receipt checkout, Chapa online pay, and Barista AI.
 
-First, run the development server:
+**For assessment review:** use the **deployed Vercel URL** — it is intended to behave the same as the developer’s local demo (full menu, filters, cart, payments).
+
+---
+
+## Deploy once (author checklist)
+
+### Neon (database only)
+
+1. [console.neon.tech](https://console.neon.tech) → create project.
+2. Copy the **PostgreSQL connection string** (Connection details).  
+   Ignore Neon CLI steps like `neon deploy` / `neon.ts` — this app uses **Vercel**, not Neon deploy.
+3. If `prisma db push` fails during build, use Neon’s **direct** (non-pooler) connection string for `DATABASE_URL`.
+
+### Vercel
+
+1. Import this GitHub repository.
+2. Vercel automatically runs **`npm run vercel-build`** (PostgreSQL schema, tables, menu seed, Next.js build).
+3. Set **Environment variables** for **Production**:
+
+| Variable | Required | Notes |
+|----------|----------|--------|
+| `DATABASE_URL` | Yes | Neon PostgreSQL URL |
+| `CHAPA_SECRET_KEY` | Yes | Chapa **TEST** secret key |
+| `NEXT_PUBLIC_CHAPA_PUBLIC_KEY` | Yes | Chapa **TEST** public key |
+| `APP_URL` | No | Optional. If omitted, the app uses Vercel’s production URL for Chapa return/callback. After first deploy you may set `https://your-project.vercel.app` and redeploy. |
+
+4. Deploy → open the production URL → confirm menu loads and cart works.
+
+### Chapa (test mode)
+
+Return and callback URLs are built from the site URL, for example:
+
+- `https://<your-vercel-domain>/payment/chapa/return`
+- `https://<your-vercel-domain>/api/payment/chapa/callback`
+
+---
+
+## Local development (optional, for authors)
 
 ```bash
+npm install
+cp .env.example .env
+npx prisma db push
+npx prisma db seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Local uses SQLite (`DATABASE_URL="file:./dev.db"`). Production on Vercel uses PostgreSQL with the same app code.

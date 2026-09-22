@@ -4,7 +4,11 @@ import seedData from "../app/data/menu/seed-data.json";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.menuItem.deleteMany();
+  const existing = await prisma.menuItem.count();
+  if (existing > 0) {
+    console.log(`Menu already seeded (${existing} items). Skipping.`);
+    return;
+  }
 
   await prisma.menuItem.createMany({
     data: seedData.map((item) => ({
