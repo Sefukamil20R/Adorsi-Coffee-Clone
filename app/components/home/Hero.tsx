@@ -43,10 +43,13 @@ export default function Hero() {
             </p>
 
             <div className="mt-9 flex gap-5 max-md:flex-wrap max-md:gap-3">
-              <button className="flex items-center gap-2 rounded-full bg-[var(--gold)] px-6 py-2.5 text-[15px] font-medium text-black transition hover:opacity-90 max-md:px-4 max-md:py-2 max-md:text-[14px]">
+              <Link
+                href="/menu"
+                className="flex items-center gap-2 rounded-full bg-[var(--gold)] px-6 py-2.5 text-[15px] font-medium text-black transition hover:opacity-90 max-md:px-4 max-md:py-2 max-md:text-[14px]"
+              >
                 Order Online
                 <ArrowRight size={17} />
-              </button>
+              </Link>
 
               <Link
                 href="/#source"

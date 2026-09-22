@@ -51,7 +51,10 @@ export default function Navbar() {
     event: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    if (window.location.pathname !== "/") return;
+    if (window.location.pathname !== "/") {
+      setMenuOpen(false);
+      return;
+    }
 
     event.preventDefault();
 

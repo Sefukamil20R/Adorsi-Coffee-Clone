@@ -1,8 +1,42 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Container from "../common/Container";
 
+const exploreLinks = [
+  { name: "About Us", href: "/#about" },
+  { name: "Menu", href: "/menu" },
+  { name: "Events", href: "/events" },
+  { name: "News", href: "/news" },
+  { name: "Signature", href: "/#signature" },
+  { name: "Space", href: "/#space" },
+];
+
 export default function Footer() {
+  const pathname = usePathname();
+
+  const handleHomeAnchor = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (pathname !== "/") return;
+
+    event.preventDefault();
+
+    const target = document.getElementById(href.slice(2));
+
+    if (target) {
+      window.history.pushState(null, "", href);
+
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - 80,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <footer className="bg-[#1D2636]">
       <Container className="pb-[38px] pt-[96px]">
@@ -30,47 +64,20 @@ export default function Footer() {
             </p>
 
             <nav className="mt-[19px] flex flex-col gap-[8px]">
-              <Link
-                href="#"
-                className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
-              >
-                About Us
-              </Link>
-
-              <Link
-                href="#"
-                className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
-              >
-                Menu
-              </Link>
-
-              <Link
-                href="#"
-                className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
-              >
-                Events
-              </Link>
-
-              <Link
-                href="#"
-                className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
-              >
-                News
-              </Link>
-
-              <Link
-                href="#"
-                className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
-              >
-                Signature
-              </Link>
-
-              <Link
-                href="#"
-                className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
-              >
-                Space
-              </Link>
+              {exploreLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={
+                    item.href.startsWith("/#")
+                      ? (event) => handleHomeAnchor(event, item.href)
+                      : undefined
+                  }
+                  className="font-inter text-[14px] text-[#A7B0BF] transition-colors hover:text-[#F2F0EA]"
+                >
+                  {item.name}
+                </Link>
+              ))}
             </nav>
           </div>
 

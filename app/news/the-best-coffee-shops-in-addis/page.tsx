@@ -11,7 +11,7 @@ export default function NewsArticlePage() {
       <main className="bg-[#1D2636]">
         <section>
           <Container className="pb-[175px] pt-[180px] max-lg:pt-[190px] max-md:pb-[96px] max-md:pt-[190px]">
-            <div className="w-full max-w-[846px]">
+            <div className="mx-auto w-full max-w-[846px]">
             {/* BACK */}
             <Link
               href="/news"

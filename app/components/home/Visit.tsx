@@ -114,7 +114,9 @@ export default function Visit() {
             {/* Social icons */}
             <div className="mt-[20px] flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.instagram.com/adorsicoffee?igsh=cTlkazQ0ZWVja2Rv"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#B89A67] bg-[#45484E] transition-opacity hover:opacity-80"
               >
@@ -122,7 +124,9 @@ export default function Visit() {
               </a>
 
               <a
-                href="#"
+                href="https://www.tiktok.com/@adorsicoffee"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="TikTok"
                 className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#B89A67] bg-[#45484E] transition-opacity hover:opacity-80"
               >

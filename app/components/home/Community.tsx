@@ -1,4 +1,5 @@
 import NewsCard from "@/components/common/NewsCard";
+import Link from "next/link";
 import Container from "../common/Container";
 
 export default function Community() {
@@ -53,12 +54,12 @@ export default function Community() {
                 Check back soon.
               </p>
 
-              <a
-                href="#"
+              <Link
+                href="/events"
                 className="mt-5 inline-block font-inter text-[11px] text-[#B89A67] transition-opacity hover:opacity-70"
               >
                 Browse events →
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -82,6 +83,7 @@ export default function Community() {
             category="Announcement"
             date="Jul 13, 2026"
             title="The best coffee shops in Addis"
+            href="/news/the-best-coffee-shops-in-addis"
           />
         </div>
       </Container>

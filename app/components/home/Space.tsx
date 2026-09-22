@@ -3,7 +3,7 @@ import Container from "../common/Container";
 
 export default function Space() {
   return (
-    <section className="bg-[var(--blue-black)] py-24">
+    <section id="space" className="bg-[var(--blue-black)] py-24">
       <Container>
         {/* Header */}
         <div className="grid items-end gap-10 lg:grid-cols-[1.08fr_0.92fr]">

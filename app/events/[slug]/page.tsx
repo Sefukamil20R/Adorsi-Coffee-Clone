@@ -184,7 +184,7 @@ export default async function EventDetailPage({ params }: PageProps) {
               </div>
 
               <aside className="mt-10 lg:col-start-2 lg:row-start-1 lg:mt-[72px] lg:self-start max-md:mt-9">
-                <div className="rounded-[16px] border border-[#344056] bg-[#283347] px-8 py-8 max-md:px-6 max-md:py-7">
+                <div className="rounded-[16px] border border-[#344056] bg-[#1D2636] px-8 py-8 max-md:px-6 max-md:py-7">
                   <p className="font-inter text-[10px] font-medium uppercase tracking-[0.3em] text-[#B89A67]">
                     Registration
                   </p>
