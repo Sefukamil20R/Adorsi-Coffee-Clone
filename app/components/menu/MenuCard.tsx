@@ -8,6 +8,7 @@ type MenuCardProps = {
   description: string;
   tags: string[];
   cartId?: string;
+  highlighted?: boolean;
 };
 
 export default function MenuCard({
@@ -16,6 +17,7 @@ export default function MenuCard({
   description,
   tags,
   cartId,
+  highlighted = false,
 }: MenuCardProps) {
   const { addToCart } = useCart();
 
@@ -29,7 +31,13 @@ export default function MenuCard({
   };
 
   return (
-    <div className="flex h-full flex-col border-r border-white/10 bg-[#283347] px-7 py-6 last:border-r-0">
+    <div
+      className={`flex h-full flex-col bg-[#283347] px-7 py-6 last:border-r-0 ${
+        highlighted
+          ? "shadow-[inset_0_0_0_2px_var(--gold)]"
+          : "border-r border-white/10"
+      }`}
+    >
       {/* Title & Price */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <h3 className="font-heading text-[24px] leading-snug text-white">

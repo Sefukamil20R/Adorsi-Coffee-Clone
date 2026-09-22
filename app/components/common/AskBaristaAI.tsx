@@ -126,7 +126,7 @@ function BaristaAvatar({ size = "sm" }: { size?: "sm" | "lg" }) {
 }
 
 function BaristaMessageText({ text }: { text: string }) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
 
   return (
     <p className="font-inter text-[13px] leading-[1.55] text-[#C7CFD8]">
@@ -136,6 +136,20 @@ function BaristaMessageText({ text }: { text: string }) {
             <strong key={index} className="font-medium text-[#F2F0EA]">
               {part.slice(2, -2)}
             </strong>
+          );
+        }
+        const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (linkMatch) {
+          return (
+            <a
+              key={index}
+              href={linkMatch[2]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--gold)] underline underline-offset-2 hover:opacity-90"
+            >
+              {linkMatch[1]}
+            </a>
           );
         }
         return <span key={index}>{part}</span>;
@@ -284,7 +298,7 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
-          <div className="rounded-[12px] border border-[#344056] bg-[#283347] px-4 py-3.5">
+          <div className="rounded-[12px] border border-[#2E384C] bg-[#222B3A] px-4 py-3.5">
             <p className="font-inter text-[13px] leading-[1.55] text-[#C7CFD8]">
               Hi! I&apos;m your Barista AI ☕ Tell me your mood or what
               you&apos;re craving I&apos;ll recommend items and open the menu
@@ -295,7 +309,7 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
           {entries.map((entry) =>
             entry.role === "user" ? (
               <div key={entry.id} className="mt-4 flex justify-end">
-                <div className="max-w-[90%] rounded-[12px] border border-[#3D4A62] bg-[#323D54] px-4 py-3.5">
+                <div className="max-w-[90%] rounded-[12px] border border-[#B89A67]/45 bg-[#323D54] px-4 py-3.5">
                   <p className="font-inter text-[13px] leading-[1.55] text-[#F2F0EA]">
                     {entry.text}
                   </p>
@@ -303,7 +317,7 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
               </div>
             ) : (
               <div key={entry.id} className="mt-4">
-                <div className="rounded-[12px] border border-[#344056] bg-[#283347] px-4 py-3.5">
+                <div className="rounded-[12px] border border-[#2E384C] bg-[#222B3A] px-4 py-3.5">
                   {entry.isTyping ? (
                     <p className="animate-pulse font-inter text-[13px] leading-[1.55] text-[#8995A9]">
                       {entry.text}
@@ -311,22 +325,24 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
                   ) : (
                     <BaristaMessageText text={entry.text} />
                   )}
+                  {entry.recommendations && entry.recommendations.length > 0 ? (
+                    <div className="mt-3.5 border-t border-[#344056]/80 pt-3.5">
+                      <div className="flex flex-col gap-2">
+                        {entry.recommendations.map((item) => (
+                          <button
+                            key={item.label}
+                            type="button"
+                            onClick={() => openRecommendation(item)}
+                            className="flex w-full items-center justify-between gap-2 rounded-full border border-[#B89A67]/70 bg-transparent px-3.5 py-2 font-inter text-[12px] text-[var(--gold)] transition hover:border-[#B89A67] hover:bg-[#283347]/40"
+                          >
+                            <span className="text-left">{item.label}</span>
+                            <ExternalLinkIcon />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-                {entry.recommendations && entry.recommendations.length > 0 ? (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {entry.recommendations.map((item) => (
-                      <button
-                        key={item.label}
-                        type="button"
-                        onClick={() => openRecommendation(item)}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-[#344056] bg-[#283347] px-3 py-1.5 font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
-                      >
-                        <span>{item.label}</span>
-                        <ExternalLinkIcon />
-                      </button>
-                    ))}
-                  </div>
-                ) : null}
               </div>
             ),
           )}

@@ -80,38 +80,42 @@ export const QUICK_QUESTION_REPLIES: Record<string, BaristaReply> = {
   Hours: {
     userMessage: "What are your opening hours?",
     reply:
-      "We're open daily. Check our Visit section for the latest opening hours.",
+      "Adorsi Coffee is open daily from 07:00 to 21:00. We look forward to welcoming you!",
   },
   Location: {
-    userMessage: "Where are you located?",
+    userMessage: "Where is Adorsi Coffee located?",
     reply:
-      "You can find us in our Visit section with the location details.",
+      "Adorsi Coffee is located in Addis Ababa, Ethiopia. If you have any more questions or need help with our menu, feel free to ask!",
   },
   Contact: {
-    userMessage: "How can I contact you?",
-    reply: "You can find our contact details in the Visit section.",
+    userMessage: "How can I reach you by phone or social media?",
+    reply:
+      "You can reach us by phone at +251 945428888. For updates and to connect with us, follow us on Instagram at [Adorsi Coffee](https://www.instagram.com/adorsicoffee?igsh=cTlkazQ0ZWVja2Rv). We look forward to hearing from you!",
   },
   Events: {
-    userMessage: "What events do you have?",
-    reply: "Check our Events page for upcoming events at Adorsi.",
+    userMessage: "Do you have any upcoming events I can attend?",
+    reply:
+      "You can check out our upcoming events by visiting the Events page on our website at adorsispecialtycoffee.com/events. We look forward to seeing you there!",
   },
   Fasting: {
     userMessage: "What fasting options do you have?",
     reply:
-      "We have several fasting-friendly drinks and food options. You can explore them in our menu.",
+      "You can enjoy several fasting options, including the Fasting Macchiato for 510 ETB, Fasting Piccolo for 510 ETB, or the Fasting Flat White for 700 ETB. These drinks are made with oat, almond, or coconut milk, aligning perfectly with fasting requirements.",
+    recommendations: [
+      rec("Fasting Macchiato", 510, "menu-item-f-macchiato"),
+      rec("Fasting Piccolo", 510, "menu-item-f-piccolo"),
+      rec("Fasting Flat White", 700, "menu-item-f-flatwhite"),
+    ],
   },
   Ceremony: {
-    userMessage: "Tell me about the coffee ceremony.",
+    userMessage: "Tell me about your Ethiopian coffee ceremony.",
     reply:
-      "Our **Roasting Experience Room** is a guided journey from green beans to aromatic roast. Explore Signature items on the menu to learn more.",
-    recommendations: [
-      rec("roasting experience room", 3000, "menu-item-sig-roast"),
-    ],
+      "At Adorsi Coffee, we celebrate the traditional Ethiopian coffee ceremony, a beautiful ritual that honors coffee's rich heritage. This involves roasting green coffee beans, grinding them, and brewing freshly made coffee in a special pot known as a \"jebena.\" It's a communal experience, often accompanied by the sharing of stories, and the aroma of the freshly brewed coffee fills the air, creating a warm atmosphere. If you're interested in experiencing this, please check our Events page for details on upcoming ceremonies!",
   },
 };
 
-const GENERIC_REPLY =
-  "That sounds lovely. I'd recommend exploring our menu and choosing something that matches your mood.";
+const UNRECOGNIZED_TEXT_REPLY =
+  "It seems there was a typo in your message. How can I assist you today? If you have questions about our drinks or menu items, just let me know!";
 
 export function replyFromFreeText(text: string): BaristaReply {
   const lower = text.toLowerCase();
@@ -148,6 +152,41 @@ export function replyFromFreeText(text: string): BaristaReply {
     return {
       userMessage: text,
       reply: QUICK_QUESTION_REPLIES.Fasting.reply,
+      recommendations: QUICK_QUESTION_REPLIES.Fasting.recommendations,
+    };
+  }
+  if (lower.includes("hour") || lower.includes("open")) {
+    return {
+      userMessage: text,
+      reply: QUICK_QUESTION_REPLIES.Hours.reply,
+    };
+  }
+  if (lower.includes("location") || lower.includes("where")) {
+    return {
+      userMessage: text,
+      reply: QUICK_QUESTION_REPLIES.Location.reply,
+    };
+  }
+  if (
+    lower.includes("contact") ||
+    lower.includes("phone") ||
+    lower.includes("instagram")
+  ) {
+    return {
+      userMessage: text,
+      reply: QUICK_QUESTION_REPLIES.Contact.reply,
+    };
+  }
+  if (lower.includes("event")) {
+    return {
+      userMessage: text,
+      reply: QUICK_QUESTION_REPLIES.Events.reply,
+    };
+  }
+  if (lower.includes("ceremony") || lower.includes("jebena")) {
+    return {
+      userMessage: text,
+      reply: QUICK_QUESTION_REPLIES.Ceremony.reply,
     };
   }
   if (lower.includes("cold") || lower.includes("iced")) {
@@ -169,5 +208,5 @@ export function replyFromFreeText(text: string): BaristaReply {
     };
   }
 
-  return { userMessage: text, reply: GENERIC_REPLY };
+  return { userMessage: text, reply: UNRECOGNIZED_TEXT_REPLY };
 }

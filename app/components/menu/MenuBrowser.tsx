@@ -233,6 +233,9 @@ export default function MenuBrowser() {
                 price={formatMenuPrice(item.price)}
                 description={item.description ?? ""}
                 tags={menuItemTags(item)}
+                highlighted={
+                  deepLinkItemId != null && item.id === deepLinkItemId
+                }
               />
             </div>
           ))}
