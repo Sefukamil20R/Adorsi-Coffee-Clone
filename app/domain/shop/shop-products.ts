@@ -10,7 +10,7 @@ export type ShopProduct = {
 export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     id: "shop-adorsi-coffee-1kg",
-    name: "Adorsi Cofee",
+    name: "Adorsi Coffee",
     priceValue: 46000,
     priceLabel: "46000 ETB",
     description: "Premium Ethiopian Coffee : 1kg",

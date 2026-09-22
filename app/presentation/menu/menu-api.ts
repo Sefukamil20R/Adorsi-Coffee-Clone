@@ -16,6 +16,10 @@ export function buildMenuSearchParams(query: MenuQuery): string {
   return params.toString();
 }
 
+export function menuItemDeepLink(menuItemId: string): string {
+  return `/menu?item=${encodeURIComponent(menuItemId)}`;
+}
+
 export async function fetchMenuItems(
   query: MenuQuery,
   init?: RequestInit,

@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MenuBrowser from "@/components/menu/MenuBrowser";
 import Container from "@/components/common/Container";
+import { Suspense } from "react";
 
 export default function MenuPage() {
   return (
@@ -35,7 +36,9 @@ export default function MenuPage() {
               </p>
             </div>
 
-            <MenuBrowser />
+            <Suspense fallback={null}>
+              <MenuBrowser />
+            </Suspense>
           </Container>
         </section>
       </main>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import MenuCard from "@/components/menu/MenuCard";
 import MenuFilterDropdown from "@/components/menu/MenuFilterDropdown";
 import {
@@ -42,6 +43,11 @@ const SORT_OPTIONS: { value: MenuSort; label: string }[] = [
 type OpenDropdown = "category" | "tag" | "price" | "sort" | null;
 
 export default function MenuBrowser() {
+  const searchParams = useSearchParams();
+  const deepLinkItemId = searchParams.get("item");
+  const resetForDeepLinkRef = useRef(false);
+  const scrolledToItemRef = useRef<string | null>(null);
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [tag, setTag] = useState("all");
@@ -79,6 +85,32 @@ export default function MenuBrowser() {
     const t = window.setTimeout(load, search ? 200 : 0);
     return () => window.clearTimeout(t);
   }, [load, search]);
+
+  useEffect(() => {
+    if (!deepLinkItemId || loading) return;
+
+    const found = items.some((item) => item.id === deepLinkItemId);
+    if (!found && !resetForDeepLinkRef.current) {
+      resetForDeepLinkRef.current = true;
+      setSearch("");
+      setCategory("all");
+      setTag("all");
+      setPrice("all");
+      setSort("name-asc");
+      return;
+    }
+
+    if (!found) return;
+    if (scrolledToItemRef.current === deepLinkItemId) return;
+
+    const target = document.getElementById(`menu-item-${deepLinkItemId}`);
+    if (!target) return;
+
+    scrolledToItemRef.current = deepLinkItemId;
+    window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }, [deepLinkItemId, items, loading]);
 
   return (
     <>
@@ -194,14 +226,15 @@ export default function MenuBrowser() {
       >
         {!loading &&
           items.map((item) => (
-            <MenuCard
-              key={item.id}
-              cartId={item.id}
-              title={item.name}
-              price={formatMenuPrice(item.price)}
-              description={item.description ?? ""}
-              tags={menuItemTags(item)}
-            />
+            <div key={item.id} id={`menu-item-${item.id}`}>
+              <MenuCard
+                cartId={item.id}
+                title={item.name}
+                price={formatMenuPrice(item.price)}
+                description={item.description ?? ""}
+                tags={menuItemTags(item)}
+              />
+            </div>
           ))}
       </div>
     </>

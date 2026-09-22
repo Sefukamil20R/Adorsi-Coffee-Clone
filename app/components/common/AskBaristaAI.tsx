@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  MOOD_REPLIES,
+  QUICK_QUESTION_REPLIES,
+  replyFromFreeText,
+  type BaristaRecommendation,
+} from "@/domain/barista/barista-responses";
+import { menuItemDeepLink } from "@/presentation/menu/menu-api";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 const moodChips = [
   { emoji: "😴", label: "Tired" },
@@ -18,6 +26,21 @@ const quickQuestions = [
   { emoji: "🌿", label: "Fasting" },
   { emoji: "🍵", label: "Ceremony" },
 ];
+
+const BREWING_MESSAGE = "Brewing your recommendation...";
+const REPLY_DELAY_MS = 900;
+
+type ChatEntry = {
+  id: string;
+  role: "user" | "barista";
+  text: string;
+  recommendations?: BaristaRecommendation[];
+  isTyping?: boolean;
+};
+
+function nextId() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
 
 function CloseIcon() {
   return (
@@ -60,6 +83,28 @@ function SendIcon() {
   );
 }
 
+function ExternalLinkIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="shrink-0 opacity-80"
+    >
+      <path
+        d="M14 5H19V10M19 5L10 14M19 14V19H5V5H10"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function BaristaAvatar({ size = "sm" }: { size?: "sm" | "lg" }) {
   const isLarge = size === "lg";
 
@@ -80,8 +125,33 @@ function BaristaAvatar({ size = "sm" }: { size?: "sm" | "lg" }) {
   );
 }
 
+function BaristaMessageText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+
+  return (
+    <p className="font-inter text-[13px] leading-[1.55] text-[#C7CFD8]">
+      {parts.map((part, index) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return (
+            <strong key={index} className="font-medium text-[#F2F0EA]">
+              {part.slice(2, -2)}
+            </strong>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </p>
+  );
+}
+
 function BaristaDialog({ onClose }: { onClose: () => void }) {
+  const router = useRouter();
   const [message, setMessage] = useState("");
+  const [entries, setEntries] = useState<ChatEntry[]>([]);
+  const [conversationStarted, setConversationStarted] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
+  const isReplyingRef = useRef(false);
+  const replyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -96,8 +166,82 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      if (replyTimerRef.current) clearTimeout(replyTimerRef.current);
     };
   }, [onClose]);
+
+  const beginDelayedReply = (
+    userMessage: string,
+    reply: string,
+    recommendations?: BaristaRecommendation[],
+  ) => {
+    if (isReplyingRef.current) return;
+
+    setConversationStarted(true);
+    isReplyingRef.current = true;
+    setIsReplying(true);
+
+    const typingId = nextId();
+
+    setEntries((prev) => [
+      ...prev,
+      { id: nextId(), role: "user", text: userMessage },
+      {
+        id: typingId,
+        role: "barista",
+        text: BREWING_MESSAGE,
+        isTyping: true,
+      },
+    ]);
+
+    replyTimerRef.current = setTimeout(() => {
+      setEntries((prev) =>
+        prev.map((entry) =>
+          entry.id === typingId
+            ? {
+                id: typingId,
+                role: "barista",
+                text: reply,
+                recommendations,
+              }
+            : entry,
+        ),
+      );
+      isReplyingRef.current = false;
+      setIsReplying(false);
+      replyTimerRef.current = null;
+    }, REPLY_DELAY_MS);
+  };
+
+  const handleMood = (label: string) => {
+    const preset = MOOD_REPLIES[label];
+    if (!preset) return;
+    beginDelayedReply(preset.userMessage, preset.reply, preset.recommendations);
+  };
+
+  const handleQuickQuestion = (label: string) => {
+    const preset = QUICK_QUESTION_REPLIES[label];
+    if (!preset) return;
+    beginDelayedReply(preset.userMessage, preset.reply, preset.recommendations);
+  };
+
+  const handleSend = () => {
+    const trimmed = message.trim();
+    if (!trimmed || isReplying) return;
+
+    const { userMessage, reply, recommendations } = replyFromFreeText(trimmed);
+    beginDelayedReply(userMessage, reply, recommendations);
+    setMessage("");
+  };
+
+  const openRecommendation = (item: BaristaRecommendation) => {
+    onClose();
+    if (item.menuItemId) {
+      router.push(menuItemDeepLink(item.menuItemId));
+      return;
+    }
+    router.push("/menu");
+  };
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 max-md:px-4 max-md:py-6">
@@ -148,33 +292,80 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
             </p>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {moodChips.map((chip) => (
-              <button
-                key={chip.label}
-                type="button"
-                className="rounded-full border border-[#344056] bg-[#283347] px-3 py-1.5 font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
-              >
-                {chip.emoji} {chip.label}
-              </button>
-            ))}
-          </div>
+          {entries.map((entry) =>
+            entry.role === "user" ? (
+              <div key={entry.id} className="mt-4 flex justify-end">
+                <div className="max-w-[90%] rounded-[12px] border border-[#3D4A62] bg-[#323D54] px-4 py-3.5">
+                  <p className="font-inter text-[13px] leading-[1.55] text-[#F2F0EA]">
+                    {entry.text}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div key={entry.id} className="mt-4">
+                <div className="rounded-[12px] border border-[#344056] bg-[#283347] px-4 py-3.5">
+                  {entry.isTyping ? (
+                    <p className="animate-pulse font-inter text-[13px] leading-[1.55] text-[#8995A9]">
+                      {entry.text}
+                    </p>
+                  ) : (
+                    <BaristaMessageText text={entry.text} />
+                  )}
+                </div>
+                {entry.recommendations && entry.recommendations.length > 0 ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {entry.recommendations.map((item) => (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={() => openRecommendation(item)}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-[#344056] bg-[#283347] px-3 py-1.5 font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
+                      >
+                        <span>{item.label}</span>
+                        <ExternalLinkIcon />
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ),
+          )}
 
-          <p className="mt-5 font-inter text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B778A]">
-            Quick questions
-          </p>
+          {!conversationStarted ? (
+            <>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {moodChips.map((chip) => (
+                  <button
+                    key={chip.label}
+                    type="button"
+                    disabled={isReplying}
+                    onClick={() => handleMood(chip.label)}
+                    className="rounded-full border border-[#344056] bg-[#283347] px-3 py-1.5 font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068] disabled:opacity-50"
+                  >
+                    {chip.emoji} {chip.label}
+                  </button>
+                ))}
+              </div>
 
-          <div className="mt-3 flex flex-wrap gap-2">
-            {quickQuestions.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                className="rounded-full border border-[#344056] bg-[#283347] px-3 py-1.5 font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
-              >
-                {item.emoji} {item.label}
-              </button>
-            ))}
-          </div>
+              <p className="mt-5 font-inter text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B778A]">
+                Quick questions
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {quickQuestions.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    disabled={isReplying}
+                    onClick={() => handleQuickQuestion(item.label)}
+                    className="rounded-full border border-[#344056] bg-[#283347] px-3 py-1.5 font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068] disabled:opacity-50"
+                  >
+                    {item.emoji} {item.label}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : null}
         </div>
 
         <div className="border-t border-[#2A3344] px-5 py-4">
@@ -183,13 +374,22 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
               type="text"
               value={message}
               onChange={(event) => setMessage(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  handleSend();
+                }
+              }}
               placeholder="How are you feeling?"
-              className="min-w-0 flex-1 bg-transparent font-inter text-[13px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none"
+              disabled={isReplying}
+              className="min-w-0 flex-1 bg-transparent font-inter text-[13px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none disabled:opacity-60"
             />
             <button
               type="button"
               aria-label="Send message"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--gold)] text-[#1D2636] transition hover:opacity-90"
+              onClick={handleSend}
+              disabled={isReplying}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--gold)] text-[#1D2636] transition hover:opacity-90 disabled:opacity-60"
             >
               <SendIcon />
             </button>
