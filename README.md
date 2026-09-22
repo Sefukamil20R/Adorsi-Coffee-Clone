@@ -2,14 +2,12 @@
 
 A Next.js clone of the Adorsi Specialty Coffee website, built for a web development assessment.
 
-The project includes the main website, menu, shop, cart, checkout, Chapa test payments, and a simple Barista AI interaction.
+The project includes the main website, menu, shop, cart, checkout, Chapa test payments, and a Barista AI interaction.
 
 ## Live Demo
 
 **Deployed website:**  
-`https://your-vercel-url.vercel.app`
-
-Replace the link above with your actual Vercel production URL after deploy.
+`https://adorsi-coffee-clone.vercel.app/`
 
 The deployed version is the recommended way to review the project.
 
@@ -75,4 +73,3 @@ Local development uses SQLite (`DATABASE_URL="file:./dev.db"` in `.env`). The li
 
 - Use `npm run dev` for local development (webpack).
 - Chapa is configured for **test mode** only.
-- Menu data comes from the seeded database, not hardcoded in the UI.
