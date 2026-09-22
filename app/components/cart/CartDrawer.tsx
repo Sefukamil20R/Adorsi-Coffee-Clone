@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  isValidCustomerName,
+  isValidEthiopianPhone,
+} from "@/domain/payment/customer";
+import { initializeChapaCheckout } from "@/presentation/payment/chapa-api";
 import { useCart } from "./CartContext";
 
 const CBE_ACCOUNT = "1000722771552";
@@ -257,10 +262,17 @@ function CartWithItemsBody() {
   );
   const [nameError, setNameError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+  const [phoneFormatError, setPhoneFormatError] = useState(false);
   const [receiptError, setReceiptError] = useState(false);
+  const [chapaLoading, setChapaLoading] = useState(false);
+  const [chapaError, setChapaError] = useState<string | null>(null);
+  const [chapaValidationMessage, setChapaValidationMessage] = useState<
+    string | null
+  >(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const chapaButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(
     () => () => {
@@ -346,6 +358,110 @@ function CartWithItemsBody() {
     setPhoneError(false);
     setPaymentMethod("bank");
     clearCart();
+  };
+
+  const showChapaFeedback = () => {
+    requestAnimationFrame(() => {
+      chapaButtonRef.current?.scrollIntoView({
+        block: "nearest",
+        behavior: "smooth",
+      });
+    });
+  };
+
+  const handlePayOnlineChapa = async () => {
+    if (process.env.NODE_ENV === "development") {
+      console.log("[CHAPA] Pay Online clicked");
+    }
+
+    if (chapaLoading) return;
+
+    setChapaError(null);
+    setChapaValidationMessage(null);
+    setPhoneFormatError(false);
+
+    const trimmedName = fullName.trim();
+    const trimmedPhone = phone.trim();
+    let valid = true;
+    let validationMessage: string | null = null;
+
+    if (!isValidCustomerName(trimmedName)) {
+      setNameError(true);
+      valid = false;
+      validationMessage = "Enter your full name to pay online.";
+    }
+
+    if (!trimmedPhone) {
+      setPhoneError(true);
+      valid = false;
+      validationMessage ??= "Enter your phone number to pay online.";
+    } else if (!isValidEthiopianPhone(trimmedPhone)) {
+      setPhoneError(true);
+      setPhoneFormatError(true);
+      valid = false;
+      validationMessage =
+        "Use a valid Ethiopian number (09xxxxxxxx or 07xxxxxxxx).";
+    }
+
+    if (process.env.NODE_ENV === "development") {
+      console.log("[CHAPA] Validation:", valid ? "passed" : "failed", {
+        name: trimmedName,
+        phone: trimmedPhone,
+        items,
+        totalValue,
+      });
+    }
+
+    if (!valid) {
+      setChapaValidationMessage(validationMessage);
+      showChapaFeedback();
+      if (!isValidCustomerName(trimmedName)) nameInputRef.current?.focus();
+      else if (!trimmedPhone || !isValidEthiopianPhone(trimmedPhone)) {
+        // phone field is second in grid — focus via query from container
+      }
+      return;
+    }
+
+    setChapaLoading(true);
+
+    try {
+      if (process.env.NODE_ENV === "development") {
+        console.log("[CHAPA] Calling /api/payment/chapa/initialize");
+      }
+
+      const result = await initializeChapaCheckout({
+        fullName: trimmedName,
+        phone: trimmedPhone,
+        lines: items.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+        })),
+      });
+
+      if ("error" in result && result.error) {
+        setChapaError(
+          typeof result.error === "string"
+            ? result.error
+            : "Unable to start online payment. Please try again.",
+        );
+        showChapaFeedback();
+        return;
+      }
+
+      if ("checkoutUrl" in result && result.checkoutUrl) {
+        window.location.href = result.checkoutUrl;
+        return;
+      }
+
+      setChapaError("Unable to start online payment. Please try again.");
+      showChapaFeedback();
+    } catch (error) {
+      console.error("[CHAPA] Initialization failed:", error);
+      setChapaError("Unable to start online payment. Please try again.");
+      showChapaFeedback();
+    } finally {
+      setChapaLoading(false);
+    }
   };
 
   const hasReceipt = Boolean(receiptPreviewUrl && receiptFile);
@@ -437,7 +553,10 @@ function CartWithItemsBody() {
             value={fullName}
             onChange={(e) => {
               setFullName(e.target.value);
-              if (e.target.value.trim()) setNameError(false);
+              if (e.target.value.trim()) {
+                setNameError(false);
+                setChapaValidationMessage(null);
+              }
             }}
             className={`h-[40px] rounded-[8px] border bg-[#151C28] px-3 font-inter text-[13px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none focus:border-[#435068] ${
               nameError ? "border-[#B85C5C]" : "border-[#344056]"
@@ -449,13 +568,33 @@ function CartWithItemsBody() {
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value);
-              if (e.target.value.trim()) setPhoneError(false);
+              if (e.target.value.trim()) {
+                setPhoneError(false);
+                setPhoneFormatError(false);
+                setChapaValidationMessage(null);
+              }
             }}
             className={`h-[40px] rounded-[8px] border bg-[#151C28] px-3 font-inter text-[13px] text-[#F2F0EA] placeholder:text-[#6B778A] outline-none focus:border-[#435068] ${
               phoneError ? "border-[#B85C5C]" : "border-[#344056]"
             }`}
           />
         </div>
+
+        {nameError && chapaValidationMessage?.includes("full name") ? (
+          <p className="mt-1.5 font-inter text-[11px] text-[#B85C5C]">
+            Enter your full name to pay online.
+          </p>
+        ) : null}
+
+        {phoneFormatError ? (
+          <p className="mt-1.5 font-inter text-[11px] text-[#B85C5C]">
+            Use a valid Ethiopian number (09xxxxxxxx or 07xxxxxxxx).
+          </p>
+        ) : phoneError && chapaValidationMessage?.includes("phone number") ? (
+          <p className="mt-1.5 font-inter text-[11px] text-[#B85C5C]">
+            Enter your phone number to pay online.
+          </p>
+        ) : null}
 
         <div className="mt-3.5 flex rounded-[10px] border border-[#344056] p-1">
           <button
@@ -577,11 +716,29 @@ function CartWithItemsBody() {
         </div>
 
         <button
+          ref={chapaButtonRef}
           type="button"
-          className="mt-3.5 flex h-[40px] w-full items-center justify-center rounded-full border border-[#344056] bg-[#151C28] font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
+          onClick={() => void handlePayOnlineChapa()}
+          disabled={chapaLoading}
+          className="mt-3.5 flex h-[40px] w-full items-center justify-center rounded-full border border-[#344056] bg-[#151C28] font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068] hover:bg-[#2A3344] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Pay Online with Chapa →
+          {chapaLoading ? "Redirecting to Chapa…" : "Pay Online with Chapa →"}
         </button>
+
+        {chapaValidationMessage &&
+        !phoneFormatError &&
+        !chapaValidationMessage.includes("full name") &&
+        !chapaValidationMessage.includes("phone number") ? (
+          <p className="mt-2 font-inter text-[11px] text-[#B85C5C]">
+            {chapaValidationMessage}
+          </p>
+        ) : null}
+
+        {chapaError ? (
+          <p className="mt-2 font-inter text-[11px] leading-relaxed text-[#B85C5C]">
+            {chapaError}
+          </p>
+        ) : null}
       </div>
   );
 
@@ -589,7 +746,9 @@ function CartWithItemsBody() {
     return (
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-6 pb-7 pt-4 max-md:px-5">
         <div className="min-h-0 flex-1 overflow-y-auto">{itemsList}</div>
-        <div className="shrink-0">{checkoutSection}</div>
+        <div className="max-h-[min(72vh,720px)] shrink-0 overflow-y-auto">
+          {checkoutSection}
+        </div>
       </div>
     );
   }

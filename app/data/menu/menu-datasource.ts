@@ -104,3 +104,13 @@ export async function countMenuItems(query: MenuQuery): Promise<number> {
   const items = await findMenuItems(query);
   return items.length;
 }
+
+export async function findMenuItemsByIds(ids: string[]): Promise<MenuItem[]> {
+  if (ids.length === 0) return [];
+
+  const rows = await prisma.menuItem.findMany({
+    where: { id: { in: ids } },
+  });
+
+  return rows.map(mapRow);
+}
