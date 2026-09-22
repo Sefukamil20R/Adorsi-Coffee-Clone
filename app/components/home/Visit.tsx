@@ -35,18 +35,12 @@ function GoldIcon({
   return (
     <span
       aria-hidden="true"
-      className="block shrink-0 bg-[#B89A67]"
+      className="gold-icon-mask block shrink-0"
       style={{
         width: size,
         height: size,
         maskImage: `url("${src}")`,
         WebkitMaskImage: `url("${src}")`,
-        maskRepeat: "no-repeat",
-        WebkitMaskRepeat: "no-repeat",
-        maskPosition: "center",
-        WebkitMaskPosition: "center",
-        maskSize: "contain",
-        WebkitMaskSize: "contain",
       }}
     />
   );

@@ -6,21 +6,62 @@
   --white: #ffffff;
   --black: #111111;
 
-  --background: var(--white);
+  --background: var(--blue-black);
   --foreground: var(--black);
 
   --font-body: "Inter", sans-serif;
   --font-heading: "Cormorant Garamond", serif;
 }
 
+/* Lock palette to sRGB on wide-gamut phone displays (prevents gold/navy hue shift). */
+@supports (color: color(srgb 0 0 0)) {
+  :root {
+    --blue-black: color(srgb 0.113725 0.14902 0.211765);
+    --gold: color(srgb 0.721569 0.603922 0.403922);
+  }
+}
+
 html {
   scroll-behavior: smooth;
+  color-scheme: only dark;
+  background-color: var(--blue-black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
+  min-height: 100%;
+  background-color: var(--blue-black);
   color: var(--foreground);
   font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+input,
+textarea,
+select,
+button {
+  color-scheme: dark;
+}
+
+/* Masked SVG icons (Visit) — stable gold, fewer fringe artifacts on mobile WebKit. */
+.gold-icon-mask {
+  background-color: #b89a67;
+  transform: translateZ(0);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+@supports (color: color(srgb 0 0 0)) {
+  .gold-icon-mask {
+    background-color: color(srgb 0.721569 0.603922 0.403922);
+  }
 }
 
 h1,

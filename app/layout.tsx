@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import CartProviders from "@/components/cart/CartProviders";
@@ -13,16 +13,24 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Adorsi Ethiopia Specialty Coffee",
   description: "Adorsi Specialty Coffee",
+};
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#1D2636" },
+    { media: "(prefers-color-scheme: dark)", color: "#1D2636" },
+  ],
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ colorScheme: "only dark" }}>
       <body className={`${inter.variable} ${cormorant.variable}`}>
         <CartProviders>{children}</CartProviders>
       </body>
