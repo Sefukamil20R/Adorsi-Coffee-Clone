@@ -1,4 +1,4 @@
-import { copyFileSync, unlinkSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import path from "node:path";
 
@@ -9,7 +9,6 @@ function run(command) {
 const root = process.cwd();
 const sqliteSchemaPath = path.join(root, "prisma", "schema.prisma");
 const postgresSchemaPath = path.join(root, "prisma", "schema.postgresql.prisma");
-const sqliteSchemaBackup = path.join(root, "prisma", "schema.sqlite.prisma");
 
 const databaseUrl = process.env.DATABASE_URL ?? "";
 if (
@@ -23,8 +22,20 @@ if (
   process.exit(1);
 }
 
-copyFileSync(sqliteSchemaPath, sqliteSchemaBackup);
-copyFileSync(postgresSchemaPath, sqliteSchemaPath);
+if (!existsSync(sqliteSchemaPath)) {
+  console.error("\n[Vercel] Missing prisma/schema.prisma\n");
+  process.exit(1);
+}
+
+if (!existsSync(postgresSchemaPath)) {
+  console.error("\n[Vercel] Missing prisma/schema.postgresql.prisma\n");
+  process.exit(1);
+}
+
+const sqliteSchemaBackup = readFileSync(sqliteSchemaPath, "utf8");
+const postgresSchema = readFileSync(postgresSchemaPath, "utf8");
+
+writeFileSync(sqliteSchemaPath, postgresSchema, "utf8");
 
 try {
   run("prisma generate");
@@ -32,8 +43,5 @@ try {
   run("tsx prisma/seed.ts");
   run("next build");
 } finally {
-  copyFileSync(sqliteSchemaBackup, sqliteSchemaPath);
-  if (existsSync(sqliteSchemaBackup)) {
-    unlinkSync(sqliteSchemaBackup);
-  }
+  writeFileSync(sqliteSchemaPath, sqliteSchemaBackup, "utf8");
 }
