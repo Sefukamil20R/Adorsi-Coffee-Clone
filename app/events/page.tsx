@@ -1,6 +1,13 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/common/Container";
+import {
+  COFFEE_ATELIER_SLUG,
+  getEventBySlug,
+} from "@/domain/events/events-data";
+import Link from "next/link";
+
+const coffeeAtelier = getEventBySlug(COFFEE_ATELIER_SLUG)!;
 
 export default function EventsPage() {
   return (
@@ -49,16 +56,16 @@ export default function EventsPage() {
               <div className="mt-[38px] w-full max-w-[444px] rounded-[17px] border border-[#344056] px-[38px] py-[37px] max-md:mt-6 max-md:max-w-full max-md:px-6 max-md:py-7">
                 <div className="flex items-center gap-[13px] max-md:flex-wrap max-md:gap-x-3 max-md:gap-y-2">
                   <span className="font-inter text-[10px] font-medium uppercase tracking-[0.25em] text-[#B89A67]">
-                    Free
+                    {coffeeAtelier.listTags[0]}
                   </span>
 
                   <span className="font-inter text-[10px] font-medium uppercase tracking-[0.25em] text-[#7E899B]">
-                    External Registration
+                    {coffeeAtelier.listTags[1]}
                   </span>
                 </div>
 
                 <h3 className="mt-[20px] font-cormorant text-[25px] leading-none text-[#F2F0EA]">
-                  The Coffee Atelier
+                  {coffeeAtelier.title}
                 </h3>
 
                 <div className="mt-[23px] flex items-center gap-[10px]">
@@ -87,7 +94,7 @@ export default function EventsPage() {
                   </svg>
 
                   <span className="font-inter text-[14px] text-[#AAB3C1]">
-                    Thu, Jul 16 • 6:00 PM
+                    {coffeeAtelier.listDateLine}
                   </span>
                 </div>
 
@@ -114,16 +121,16 @@ export default function EventsPage() {
                   </svg>
 
                   <span className="font-inter text-[14px] text-[#AAB3C1]">
-                    Adorsi Coffee
+                    {coffeeAtelier.where}
                   </span>
                 </div>
 
-                <button
-                  type="button"
-                  className="mt-[23px] rounded-full border border-[#806D4F] bg-[#3A3E45] px-[18px] py-[9px] font-inter text-[14px] text-[#B89A67] transition-colors hover:bg-[#454A52]"
+                <Link
+                  href={`/events/${coffeeAtelier.slug}`}
+                  className="mt-[23px] inline-flex rounded-full border border-[#806D4F] bg-[#3A3E45] px-[18px] py-[9px] font-inter text-[14px] text-[#B89A67] transition-colors hover:bg-[#454A52]"
                 >
                   Register →
-                </button>
+                </Link>
               </div>
             </div>
           </Container>
