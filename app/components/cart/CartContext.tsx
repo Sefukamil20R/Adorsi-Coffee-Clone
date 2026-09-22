@@ -37,6 +37,7 @@ type CartContextValue = {
   removeItem: (id: string) => void;
   clearCart: () => void;
   showReceiptSubmittedSnackbar: () => void;
+  completeReceiptSubmission: () => void;
   totalValue: number;
   totalLabel: string;
 };
@@ -84,6 +85,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const showReceiptSubmittedSnackbar = useCallback(() => {
+    setSnackbar({ kind: "receipt-submitted" });
+    scheduleSnackbarDismiss();
+  }, [scheduleSnackbarDismiss]);
+
+  const completeReceiptSubmission = useCallback(() => {
+    setItems([]);
     setSnackbar({ kind: "receipt-submitted" });
     scheduleSnackbarDismiss();
   }, [scheduleSnackbarDismiss]);
@@ -186,6 +193,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeItem,
       clearCart,
       showReceiptSubmittedSnackbar,
+      completeReceiptSubmission,
       totalValue,
       totalLabel,
     }),
@@ -203,6 +211,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeItem,
       clearCart,
       showReceiptSubmittedSnackbar,
+      completeReceiptSubmission,
       totalValue,
       totalLabel,
     ],

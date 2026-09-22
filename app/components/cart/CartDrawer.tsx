@@ -167,7 +167,7 @@ function DrawerReceiptSnackbar() {
 
 function EmptyCartBody() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 pb-14 pt-6 text-center max-md:px-5">
+    <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center max-md:px-5">
       <CartIconGold className="h-10 w-10" />
       <p className="mt-6 font-heading text-[22px] leading-tight text-[#F2F0EA]">
         Your cup is empty.
@@ -244,7 +244,7 @@ function CartWithItemsBody() {
     updateQuantity,
     removeItem,
     clearCart,
-    showReceiptSubmittedSnackbar,
+    completeReceiptSubmission,
   } = useCart();
   const [paymentMethod, setPaymentMethod] = useState<"bank" | "restaurant">(
     "bank",
@@ -317,17 +317,7 @@ function CartWithItemsBody() {
     }
 
     if (receiptPreviewUrl) URL.revokeObjectURL(receiptPreviewUrl);
-    setReceiptFile(null);
-    setReceiptPreviewUrl(null);
-    setFullName("");
-    setPhone("");
-    setNameError(false);
-    setPhoneError(false);
-    setReceiptError(false);
-    setPaymentMethod("bank");
-
-    clearCart();
-    showReceiptSubmittedSnackbar();
+    completeReceiptSubmission();
   };
 
   const handlePlaceRestaurantOrder = () => {
@@ -359,10 +349,10 @@ function CartWithItemsBody() {
   };
 
   const hasReceipt = Boolean(receiptPreviewUrl && receiptFile);
+  const pinCheckoutToBottom = paymentMethod === "restaurant";
 
-  return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-6 pb-7 pt-4 max-md:px-5">
-      <div className="space-y-5">
+  const itemsList = (
+    <div className="space-y-5">
         {items.map((item) => {
           const lineTotal = item.priceValue * item.quantity;
 
@@ -420,9 +410,13 @@ function CartWithItemsBody() {
             </div>
           );
         })}
-      </div>
+    </div>
+  );
 
-      <div className="mt-5 border-t border-[#2A3344] pt-5">
+  const checkoutSection = (
+      <div
+        className={`border-t border-[#2A3344] pt-5 ${pinCheckoutToBottom ? "" : "mt-5"}`}
+      >
         <div className="flex items-end justify-between">
           <p className="pb-0.5 font-inter text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--gold)]">
             Checkout • {itemCount} {itemCount === 1 ? "ITEM" : "ITEMS"}
@@ -584,19 +578,33 @@ function CartWithItemsBody() {
 
         <button
           type="button"
-          className="mt-3.5 flex h-[40px] w-full items-center justify-center rounded-[8px] border border-[#344056] bg-[#151C28] font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
+          className="mt-3.5 flex h-[40px] w-full items-center justify-center rounded-full border border-[#344056] bg-[#151C28] font-inter text-[12px] text-[#C7CFD8] transition hover:border-[#435068]"
         >
           Pay Online with Chapa →
         </button>
       </div>
+  );
+
+  if (pinCheckoutToBottom) {
+    return (
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-6 pb-7 pt-4 max-md:px-5">
+        <div className="min-h-0 flex-1 overflow-y-auto">{itemsList}</div>
+        <div className="shrink-0">{checkoutSection}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-6 pb-7 pt-4 max-md:px-5">
+      {itemsList}
+      {checkoutSection}
     </div>
   );
 }
 
 export default function CartDrawer() {
-  const { drawerOpen, closeDrawer, items, snackbar } = useCart();
+  const { drawerOpen, closeDrawer, items } = useCart();
   const hasItems = items.length > 0;
-  const receiptSnackbarOpen = snackbar?.kind === "receipt-submitted";
 
   if (!drawerOpen) return null;
 
@@ -616,9 +624,7 @@ export default function CartDrawer() {
         className="absolute right-0 top-0 flex h-full w-full max-w-[480px] flex-col bg-[#1A2230] shadow-[-8px_0_40px_rgba(0,0,0,0.45)] animate-[slideInRight_0.3s_ease-out] max-md:max-w-none"
       >
         <DrawerHeader onClose={closeDrawer} />
-        <div
-          className={`relative flex min-h-0 flex-1 flex-col ${receiptSnackbarOpen ? "pb-24" : ""}`}
-        >
+        <div className="relative flex min-h-0 flex-1 flex-col">
           {hasItems ? <CartWithItemsBody /> : <EmptyCartBody />}
           <DrawerReceiptSnackbar />
         </div>
