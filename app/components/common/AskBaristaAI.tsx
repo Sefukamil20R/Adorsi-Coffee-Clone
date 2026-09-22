@@ -100,7 +100,7 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 max-md:items-end max-md:p-0">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 max-md:px-4 max-md:py-6">
       <button
         type="button"
         aria-label="Close Barista AI"
@@ -112,7 +112,7 @@ function BaristaDialog({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="barista-ai-title"
-        className="relative flex max-h-[min(640px,calc(100vh-32px))] w-full max-w-[420px] flex-col overflow-hidden rounded-[16px] border border-[#344056] bg-[#1D2636] shadow-[0_24px_80px_rgba(0,0,0,0.45)] max-md:max-h-[92vh] max-md:max-w-none max-md:rounded-b-none max-md:rounded-t-[20px]"
+        className="relative flex max-h-[min(640px,calc(100vh-32px))] w-full max-w-[420px] flex-col overflow-hidden rounded-[16px] border border-[#344056] bg-[#1D2636] shadow-[0_24px_80px_rgba(0,0,0,0.45)] max-md:max-h-[min(640px,calc(100vh-48px))]"
       >
         <div className="flex items-start justify-between gap-3 border-b border-[#2A3344] px-5 py-4">
           <div className="flex min-w-0 items-start gap-3">
