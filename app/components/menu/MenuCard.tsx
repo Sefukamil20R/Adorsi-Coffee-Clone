@@ -1,3 +1,7 @@
+"use client";
+
+import { parsePriceValue, useCart } from "../cart/CartContext";
+
 type MenuCardProps = {
   title: string;
   price: string;
@@ -11,6 +15,17 @@ export default function MenuCard({
   description,
   tags,
 }: MenuCardProps) {
+  const { addToCart } = useCart();
+
+  const handleAddToOrder = () => {
+    addToCart({
+      id: title.toLowerCase().replace(/\s+/g, "-"),
+      title,
+      price,
+      priceValue: parsePriceValue(price),
+    });
+  };
+
   return (
     <div className="flex h-full flex-col border-r border-white/10 bg-[#283347] px-7 py-6 last:border-r-0">
       {/* Title & Price */}
@@ -20,10 +35,10 @@ export default function MenuCard({
         </h3>
 
         <div className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-[#3E424B] px-3 py-1">
-  <span className="text-[11px] font-normal text-[var(--gold)]">
-    {price}
-  </span>
-</div>
+          <span className="text-[11px] font-normal text-[var(--gold)]">
+            {price}
+          </span>
+        </div>
       </div>
 
       {/* Tags */}
@@ -44,7 +59,11 @@ export default function MenuCard({
       </p>
 
       {/* Button */}
-      <button className="flex w-fit items-center gap-2 rounded-full bg-[var(--gold)] px-5 py-2.5 text-[14px] font-medium text-[var(--blue-black)] transition hover:opacity-90">
+      <button
+        type="button"
+        onClick={handleAddToOrder}
+        className="flex w-fit items-center gap-2 rounded-full bg-[var(--gold)] px-5 py-2.5 text-[14px] font-medium text-[var(--blue-black)] transition hover:opacity-90"
+      >
         <span className="text-lg leading-none">+</span>
         Add to order
       </button>

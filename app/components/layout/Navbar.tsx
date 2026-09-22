@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "../common/Container";
+import { useCart } from "../cart/CartContext";
 
 const links = [
   { name: "About Us", href: "/#about" },
@@ -18,6 +19,7 @@ const links = [
 export default function Navbar() {
   const [isHero, setIsHero] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { itemCount, openDrawer } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +113,8 @@ export default function Navbar() {
           {/* Cart */}
           <button
             type="button"
-            className="cursor-pointer max-lg:flex max-lg:items-center max-lg:justify-center"
+            onClick={openDrawer}
+            className="relative cursor-pointer max-lg:flex max-lg:items-center max-lg:justify-center"
             aria-label="Cart"
           >
             <Image
@@ -121,6 +124,11 @@ export default function Navbar() {
               height={22}
               className="brightness-0 invert max-lg:h-[18px] max-lg:w-[18px]"
             />
+            {itemCount > 0 ? (
+              <span className="absolute -right-1.5 -top-1.5 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--gold)] px-1 font-inter text-[10px] font-semibold leading-none text-[#1D2636] max-lg:-right-1 max-lg:-top-1 max-lg:h-[14px] max-lg:min-w-[14px] max-lg:text-[9px]">
+                {itemCount}
+              </span>
+            ) : null}
           </button>
 
           {/* Desktop Order Button */}
