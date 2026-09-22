@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import Container from "../common/Container";
 import MenuCard from "../menu/MenuCard";
@@ -59,7 +60,12 @@ export default function MenuPreviewClient() {
             <p className="w-full max-w-[360px] text-[15px] leading-7 text-[#C7CFD8] max-md:max-w-full max-md:text-[14px] max-md:leading-6">
               Tap to add. Review your selections in the cart and place your order
               we&apos;ll have it ready when you arrive.{" "}
-              <span className="text-[var(--gold)]">Browse the full menu →</span>
+              <Link
+                href="/menu"
+                className="text-[var(--gold)] transition-opacity hover:opacity-80"
+              >
+                Browse the full menu →
+              </Link>
             </p>
           </div>
         </div>

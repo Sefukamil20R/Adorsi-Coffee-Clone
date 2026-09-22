@@ -80,7 +80,7 @@ export default function Navbar() {
           : "bg-[var(--blue-black)] backdrop-blur-sm"
       }`}
     >
-      <Container className="flex h-20 items-center justify-between max-lg:h-[158px]">
+      <Container className="flex h-20 items-center justify-between max-lg:h-[72px]">
         {/* Logo */}
         <Link href="/" onClick={() => setMenuOpen(false)}>
           <Image
@@ -165,8 +165,8 @@ export default function Navbar() {
           menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-[var(--blue-black)] px-[48px] py-[28px]">
-          <div className="flex flex-col gap-[24px]">
+        <div className="bg-[var(--blue-black)] px-6 py-5 max-md:px-6">
+          <div className="flex flex-col gap-5">
             {links.map((item) => (
               <Link
                 key={item.name}

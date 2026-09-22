@@ -33,12 +33,12 @@ export default function Community() {
               Upcoming events
             </h3>
 
-            <a
-              href="#"
+            <Link
+              href="/events"
               className="font-inter text-[11px] text-[#B89A67] transition-opacity hover:opacity-70"
             >
               View all events →
-            </a>
+            </Link>
           </div>
 
           <div className="flex min-h-[185px] w-full items-center justify-center rounded-[14px] border border-[#344056] bg-[#242E41] px-6 py-10 text-center">
@@ -71,12 +71,12 @@ export default function Community() {
               Latest news
             </h3>
 
-            <a
-              href="#"
+            <Link
+              href="/news"
               className="font-inter text-[11px] text-[#B89A67] transition-opacity hover:opacity-70"
             >
               View all news →
-            </a>
+            </Link>
           </div>
 
           <NewsCard

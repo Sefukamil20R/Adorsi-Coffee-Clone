@@ -71,20 +71,31 @@ export async function chapaInitializeTransaction(
   return { checkoutUrl: body.data.checkout_url };
 }
 
+const CHAPA_VERIFY_TIMEOUT_MS = 6000;
+
 export async function chapaVerifyTransaction(txRef: string): Promise<{
   status: string;
   refId?: string;
 }> {
-  const response = await fetch(
-    `${CHAPA_API_BASE}/transaction/verify/${encodeURIComponent(txRef)}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getChapaSecretKey()}`,
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), CHAPA_VERIFY_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(
+      `${CHAPA_API_BASE}/transaction/verify/${encodeURIComponent(txRef)}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getChapaSecretKey()}`,
+        },
+        cache: "no-store",
+        signal: controller.signal,
       },
-      cache: "no-store",
-    },
-  );
+    );
+  } finally {
+    clearTimeout(timeout);
+  }
 
   const body = (await response.json()) as ChapaApiEnvelope<{
     status?: string;
