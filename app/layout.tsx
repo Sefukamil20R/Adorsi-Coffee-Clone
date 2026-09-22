@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import AskBaristaAI from "@/components/common/AskBaristaAI";
 import CartProviders from "@/components/cart/CartProviders";
 
 const inter = Inter({
@@ -25,11 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${cormorant.variable}`}>
-        <CartProviders>
-          {children}
-
-          <AskBaristaAI />
-        </CartProviders>
+        <CartProviders>{children}</CartProviders>
       </body>
     </html>
   );

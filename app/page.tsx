@@ -11,6 +11,7 @@ import Space from "@/components/home/Space";
 import Source from "@/components/home/Source";
 import Community from "@/components/home/Community";
 import Visit from "@/components/home/Visit";
+import AskBaristaAI from "@/components/common/AskBaristaAI";
 
 export default function Home() {
   return (
@@ -29,6 +30,8 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      <AskBaristaAI />
     </>
   );
 }
